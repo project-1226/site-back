@@ -20,6 +20,17 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	// DB관리
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1'
+    // sql문
+    runtimeOnly("com.mysql:mysql-connector-j")
+    // 테스트 용도
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // 로그찍기 위한 용도
+    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+    // 파일 업로드
+	implementation 'commons-fileupload:commons-fileupload:1.4'
 }
 
 tasks.named('test') {
