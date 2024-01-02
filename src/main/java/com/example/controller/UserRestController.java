@@ -1,4 +1,4 @@
-package com.example.controller.user;
+package com.example.controller;
 
 import java.util.HashMap;
 
@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.dao.user.UserDAO;
-import com.example.domain.user.UserVO;
+import com.example.dao.UserDAO;
+import com.example.domain.UserVO;
+import com.example.service.UserService;
 
 @RestController
 @RequestMapping("user")
@@ -18,9 +19,12 @@ public class UserRestController {
 	@Autowired
 	UserDAO dao;
 	
+	@Autowired
+	UserService service;
+	
 	@PostMapping("/insert")
-	public void insert(UserVO vo) {
-		dao.insert(vo);
+	public void insert(@RequestBody UserVO vo) {
+		service.insert(vo);
 	}
 	
 	@PostMapping("/login")

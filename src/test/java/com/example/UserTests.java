@@ -10,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.dao.user.UserDAO;
-import com.example.domain.user.UserVO;
+import com.example.dao.UserDAO;
+import com.example.domain.UserVO;
 
 @SpringBootTest
 class UserTests {

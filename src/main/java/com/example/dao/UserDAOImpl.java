@@ -1,4 +1,4 @@
-package com.example.dao.user;
+package com.example.dao;
 
 import java.util.HashMap;
 
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.type.filter.AbstractClassTestingTypeFilter;
 import org.springframework.stereotype.Repository;
 
-import com.example.domain.user.UserVO;
+import com.example.domain.UserVO;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
