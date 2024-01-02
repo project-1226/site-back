@@ -20,7 +20,8 @@ public class UserServiceImpl implements UserService {
 		HashMap<String, Object> user = dao.read(vo.getEmail());
 		if(user == null) {
 			dao.insert(vo);
-		}
+		} else {
+	        throw new RuntimeException("User with this email already exists");
+	    }
 	}
-
 }

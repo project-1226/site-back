@@ -29,6 +29,8 @@ public class UserDAOImpl implements UserDAO {
 	        String photo = "http://via.placeholder.com/100x100?text=" + str;
 	        vo.setAvatar(photo);
 	    }
+	    
+	    vo.setPoint(3000);
 
 	    session.insert(namespace + ".insert", vo);
 	}
