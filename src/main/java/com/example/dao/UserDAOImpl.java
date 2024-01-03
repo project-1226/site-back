@@ -1,4 +1,4 @@
-package com.example.dao.user;
+package com.example.dao;
 
 import java.util.HashMap;
 
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.type.filter.AbstractClassTestingTypeFilter;
 import org.springframework.stereotype.Repository;
 
-import com.example.domain.user.UserVO;
+import com.example.domain.UserVO;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -29,6 +29,8 @@ public class UserDAOImpl implements UserDAO {
 	        String photo = "http://via.placeholder.com/100x100?text=" + str;
 	        vo.setAvatar(photo);
 	    }
+	    
+	    vo.setPoint(3000);
 
 	    session.insert(namespace + ".insert", vo);
 	}
