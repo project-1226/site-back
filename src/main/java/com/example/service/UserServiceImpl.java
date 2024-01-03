@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@Override
 	public void insert(UserVO vo) {
-		HashMap<String, Object> user = dao.read(vo.getEmail());
+		HashMap<String, Object> user = dao.read(vo);
 		if(user == null) {
 			dao.insert(vo);
 		} else {

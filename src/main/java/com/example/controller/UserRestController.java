@@ -1,12 +1,15 @@
 package com.example.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
-import org.apache.ibatis.ognl.ObjectNullHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dao.UserDAO;
@@ -28,9 +31,9 @@ public class UserRestController {
 	}
 	
 	@PostMapping("/login")
-	public int login(@RequestBody UserVO vo) {
+	public HashMap<String, Object> login(@RequestBody UserVO vo) {
 		int result = 0; // 아이디가 없는 경우
-		HashMap<String, Object> user = dao.read(vo.getEmail());
+		HashMap<String, Object> user = dao.read(vo);
 		if(user != null ) {
 			if(!vo.getPassword().equals(user.get("password"))) {
 				result = 2; // 비밀번호 불일치
@@ -38,6 +41,15 @@ public class UserRestController {
 				result = 1; // 아이디 비밀번호 일치
 			}
 		}
-		return result;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("result", result);
+		map.put("user", user);
+		return map;
+	}
+	
+	@GetMapping("/read")
+	public HashMap<String, Object> read(@ModelAttribute("vo") UserVO vo) {
+		return dao.read(vo);
 	}
 }
