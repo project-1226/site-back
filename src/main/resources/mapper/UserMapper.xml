@@ -4,12 +4,12 @@
 	<select id="read" resultType="hashmap">
 		select *, date_format(regdate, '%Y-%m-%d %T') fmtdate
 		from user
-		where email = #{email}
+		where email = #{email} or userid = #{userid}
 	</select>
 	<insert id="insert">
-		insert into user(email, password, nickname, phone,
+		insert into user(userid, email, password, nickname, phone,
 		avatar, point, regdate)
-		values(#{email}, #{password}, #{nickname},
+		values(#{userid}, #{email}, #{password}, #{nickname},
 		#{phone}, #{avatar}, #{point}, now())
 	</insert>
 </mapper>

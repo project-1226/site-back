@@ -3,6 +3,7 @@ package com.example.domain;
 import java.util.Date;
 
 public class UserVO {
+	private String userid;
 	private String email;
 	private String password;
 	private String nickname;
@@ -10,6 +11,14 @@ public class UserVO {
 	private String avatar;
 	private int point;
 	private Date regdate;
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 
 	public String getEmail() {
 		return email;
@@ -69,8 +78,8 @@ public class UserVO {
 
 	@Override
 	public String toString() {
-		return "UserVO [email=" + email + ", password=" + password + ", nickname=" + nickname + ", phone=" + phone
-				+ ", avatar=" + avatar + ", point=" + point + ", regdate=" + regdate + "]";
+		return "UserVO [userid=" + userid + ", email=" + email + ", password=" + password + ", nickname=" + nickname
+				+ ", phone=" + phone + ", avatar=" + avatar + ", point=" + point + ", regdate=" + regdate + "]";
 	}
 
 }

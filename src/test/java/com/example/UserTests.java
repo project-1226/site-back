@@ -37,6 +37,7 @@ class UserTests {
 		//then
 		assertEquals("test", vo.getNickname());
 		assertEquals("http://via.placeholder.com/100x100?text=T", vo.getAvatar());
+		
 	}
 
 }

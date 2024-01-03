@@ -5,6 +5,6 @@ import java.util.HashMap;
 import com.example.domain.UserVO;
 
 public interface UserDAO {
-	public HashMap<String, Object> read(String email);
+	public HashMap<String, Object> read(UserVO vo);
 	public void insert(UserVO vo);
 }
