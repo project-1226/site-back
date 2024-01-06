@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.AddressMapper">
+	<select id="list" resultType="hashmap">
+		select * from address where userid
+		= #{userid}
+		order by selected desc
+		limit #{start}, #{size}
+	</select>
+	<select id="count_list" resultType="int">
+		select count(*) cnt from
+		address
+		where userid = #{userid}
+	</select>
+	<select id="read" resultType="hashmap">
+		select * from address
+		where userid =
+		#{userid} and addressid = #{addressid}
+	</select>
+	<select id="count_read" resultType="int">
+		select count(*) cnt from
+		address
+		where userid = #{userid} and addressid = #{addressid}
+	</select>
+	<insert id="insert">
+		insert into address(userid, selected, recipient,
+		recipient_phone, address1, address2, address3, regdate)
+		value(#{userid}, #{selected}, #{recipient}, #{recipient_phone},
+		#{address1}, #{address2}, #{address3}, now())
+	</insert>
+	<update id="update">
+		update address
+		set selected = #{selected}, recipient =
+		#{recipient}, recipient_phone = #{recipient_phone},
+		address1 = #{address1}, address2 = #{address2}, address3 = #{address3}
+		where
+		userid = #{userid} and addressid = #{addressid}
+	</update>
+	<update id="update_select">
+		update address
+		set selected =
+		case
+		when addressid = #{addressid} then 1
+		else 0
+		end
+		where userid = #{userid}
+	</update>
+	<delete id="delete">
+		delete from address
+		where userid = #{userid} and
+		addressid = #{addressid}
+	</delete>
+</mapper>

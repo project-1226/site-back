@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.example.domain.UserVO;
@@ -35,6 +36,9 @@ public class UserDAOImpl implements UserDAO {
 	        vo.setAvatar(photo);
 	    }
 	    
+	    // 휴대폰 번호 일괄 입력
+	    vo.setPhone("");
+	    
 	    // 포인트 적립
 	    vo.setPoint(3000);
 	    
@@ -46,6 +50,11 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public HashMap<String, Object> read(UserVO vo) {
 		return session.selectOne(namespace + ".read", vo);
+	}
+
+	@Override
+	public void update(UserVO vo) {
+		session.update(namespace + ".update", vo);
 	}
 
 }
