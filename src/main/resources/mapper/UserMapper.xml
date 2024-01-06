@@ -8,6 +8,11 @@
 		where email = #{email} or userid =
 		#{userid}
 	</select>
+	<select id="count_read" resultType="int">
+		select count(*) cnt
+		from user
+		where userid = #{userid}
+	</select>
 	<insert id="insert">
 		insert into user(userid, email, password, nickname,
 		phone,

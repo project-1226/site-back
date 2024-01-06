@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.example.domain.UserVO;
@@ -20,8 +19,16 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void insert(UserVO vo) {
 		// userid 자동 생성
-		String userid = UUID.randomUUID().toString().substring(0,20);
-		vo.setUserid(userid);
+	    boolean isDuplicate = true;
+	    String userid;
+	    while (isDuplicate) {
+	        userid = UUID.randomUUID().toString().substring(0, 20);
+	        vo.setUserid(userid);
+	        int count = isUser(vo);
+	        if (count == 0) {
+	            isDuplicate = false;
+	        }
+	    }
 		
 		// 닉네임 자동 생성
 	    String emailString = vo.getEmail();
@@ -55,6 +62,11 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void update(UserVO vo) {
 		session.update(namespace + ".update", vo);
+	}
+
+	@Override
+	public int isUser(UserVO vo) {
+		return session.selectOne(namespace + ".count_read", vo);
 	}
 
 }
