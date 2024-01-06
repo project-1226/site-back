@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.thymeleaf.standard.expression.AndExpression;
 
 import com.example.dao.UserDAO;
 import com.example.domain.UserVO;
@@ -24,6 +25,11 @@ public class UserRestController {
 	
 	@Autowired
 	UserService service;
+	
+	@GetMapping("/read")
+	public HashMap<String, Object> read(@ModelAttribute("vo") UserVO vo) {
+		return dao.read(vo);
+	}
 	
 	@PostMapping("/insert")
 	public void insert(@RequestBody UserVO vo) {
@@ -48,8 +54,8 @@ public class UserRestController {
 		return map;
 	}
 	
-	@GetMapping("/read")
-	public HashMap<String, Object> read(@ModelAttribute("vo") UserVO vo) {
-		return dao.read(vo);
+	@PostMapping("/update")
+	public void update(@RequestBody UserVO vo) {
+		dao.update(vo);
 	}
 }
