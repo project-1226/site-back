@@ -1,14 +1,13 @@
-package com.example.service;
+package com.example.user.service;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.dao.AddressDAO;
-import com.example.domain.AddressVO;
+import com.example.user.dao.AddressDAO;
+import com.example.user.domain.AddressVO;
 
 @Service
 public class AddressServiceImpl implements AddressService {

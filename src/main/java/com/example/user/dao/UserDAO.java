@@ -1,8 +1,8 @@
-package com.example.dao;
+package com.example.user.dao;
 
 import java.util.HashMap;
 
-import com.example.domain.UserVO;
+import com.example.user.domain.UserVO;
 
 public interface UserDAO {
 	public HashMap<String, Object> read(UserVO vo);

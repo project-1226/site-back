@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.user.service;
 
 import java.util.HashMap;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.dao.UserDAO;
-import com.example.domain.UserVO;
+import com.example.user.dao.UserDAO;
+import com.example.user.domain.UserVO;
 
 @Service
 public class UserServiceImpl implements UserService {

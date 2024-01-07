@@ -1,4 +1,4 @@
-package com.example.dao;
+package com.example.user.dao;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.example.domain.UserVO;
+import com.example.user.domain.UserVO;
 
 @Repository
 public class UserDAOImpl implements UserDAO {

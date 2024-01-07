@@ -1,9 +1,8 @@
-package com.example.service;
+package com.example.user.service;
 
 import java.util.HashMap;
-import java.util.List;
 
-import com.example.domain.AddressVO;
+import com.example.user.domain.AddressVO;
 
 public interface AddressService {
 	public HashMap<String, Object> list(AddressVO vo);
