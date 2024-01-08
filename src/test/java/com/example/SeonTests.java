@@ -10,10 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.dao.AddressDAO;
-import com.example.dao.UserDAO;
-import com.example.domain.AddressVO;
-import com.example.domain.UserVO;
+import com.example.user.dao.AddressDAO;
+import com.example.user.dao.UserDAO;
+import com.example.user.domain.AddressVO;
+import com.example.user.domain.UserVO;
 
 @SpringBootTest
 class SeonTests {

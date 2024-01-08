@@ -1,7 +1,6 @@
-package com.example.controller;
+package com.example.user.controller;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,12 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.dao.AddressDAO;
-import com.example.domain.AddressVO;
-import com.example.service.AddressService;
+import com.example.user.dao.AddressDAO;
+import com.example.user.domain.AddressVO;
+import com.example.user.service.AddressService;
 
 @RestController
 @RequestMapping("/address")

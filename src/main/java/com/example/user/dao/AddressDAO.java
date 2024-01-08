@@ -1,9 +1,9 @@
-package com.example.dao;
+package com.example.user.dao;
 
 import java.util.HashMap;
 import java.util.List;
 
-import com.example.domain.AddressVO;
+import com.example.user.domain.AddressVO;
 
 public interface AddressDAO {
 	public List<HashMap<String, Object>> list(AddressVO vo);
