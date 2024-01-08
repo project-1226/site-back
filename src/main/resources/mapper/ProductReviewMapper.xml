@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.ProductReviewMapper">
+	<select id="list_user" resultType="hashmap">
+		select *, date_format(regdate,
+		'%Y-%m-%d %T') fmtdate
+		from product_review where userid = #{userid}
+	</select>
+	<select id="image" resultType="hashmap">
+		select * from image where product_reviewid = #{product_reviewid}
+	</select>
+	<select id="total" resultType="int">
+		select count(*) cnt from product_review where userid = #{userid}
+	</select>
+	<select id="count_read" resultType="int">
+		select count(*) cnt from
+		product_review where userid = #{userid} and
+		productid = #{productid}
+	</select>
 	<insert id="insert">
-		call insertProductReview(#{userid}, #{productid}, #{score}, #{content}, #{image_urls})
+		call insertProductReview(#{userid}, #{productid},
+		#{score}, #{content}, #{image_urls})
 	</insert>
 </mapper>
