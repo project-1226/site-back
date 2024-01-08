@@ -2,14 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.UserMapper">
 	<select id="read" resultType="hashmap">
-		select *, date_format(regdate, '%Y-%m-%d %T') fmtdate
+		select *, date_format(regdate,
+		'%Y-%m-%d %T') fmtdate
 		from user
-		where email = #{email}
+		where email = #{email} or userid =
+		#{userid}
+	</select>
+	<select id="count_read" resultType="int">
+		select count(*) cnt
+		from user
+		where userid = #{userid}
 	</select>
 	<insert id="insert">
-		insert into user(email, password, nickname, phone,
+		insert into user(userid, email, password, nickname,
+		phone,
 		avatar, point, regdate)
-		values(#{email}, #{password}, #{nickname},
+		values(#{userid}, #{email}, #{password},
+		#{nickname},
 		#{phone}, #{avatar}, #{point}, now())
 	</insert>
+	<update id="update">
+		update user
+		set nickname = #{nickname}, phone =
+		#{phone}, password = #{password}, avatar = #{avatar}
+		where userid =
+		#{userid}
+	</update>
+
 </mapper>
