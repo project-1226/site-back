@@ -23,19 +23,11 @@ public class ProductReviewDAOImpl implements ProductReviewDAO {
 
 	@Override
 	public List<HashMap<String, Object>> list(ProductReviewVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int total(ProductReviewVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.selectOne(namespace + ".list_user", vo);
 	}
 
 	@Override
 	public List<HashMap<String, Object>> image(ProductReviewVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectList(namespace + ".list_image");
 	}
 }
