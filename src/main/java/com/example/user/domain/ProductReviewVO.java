@@ -10,6 +10,24 @@ public class ProductReviewVO {
 	private String content;
 	private Date regDate;
 	private String image_urls;
+	private int page;
+	private int size;
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
 
 	public int getProduct_reviewid() {
 		return product_reviewid;
@@ -70,8 +88,8 @@ public class ProductReviewVO {
 	@Override
 	public String toString() {
 		return "ProductReviewVO [product_reviewid=" + product_reviewid + ", userid=" + userid + ", productid="
-				+ productid + ", score=" + score + ", content=" + content + ", regDate=" + regDate
-				+ ", image_urls=" + image_urls + "]";
+				+ productid + ", score=" + score + ", content=" + content + ", regDate=" + regDate + ", image_urls="
+				+ image_urls + ", page=" + page + ", size=" + size + "]";
 	}
 
 }
