@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.ProductReviewMapper">
+	<select id="list_user" resultType="hashmap">
+		call ProductReview_userlist(#{userid}, #{page}, #{size});
+	</select>
+	<select id="list_image" resultType="hashmap">
+		select * from image where product_reviewid = #{product_reviewid}
+	</select>
 	<insert id="insert">
-		call insertProductReview(#{userid}, #{productid}, #{score}, #{content}, #{image_urls})
+		call ProductReview_insert(#{userid}, #{productid},
+		#{score}, #{content}, #{image_urls})
 	</insert>
 </mapper>

@@ -7,7 +7,7 @@ public class ProductReviewVO {
 	private String userid;
 	private int productid;
 	private int score;
-	private String contentString;
+	private String content;
 	private Date regDate;
 	private String image_urls;
 
@@ -43,12 +43,12 @@ public class ProductReviewVO {
 		this.score = score;
 	}
 
-	public String getContentString() {
-		return contentString;
+	public String getContent() {
+		return content;
 	}
 
-	public void setContentString(String contentString) {
-		this.contentString = contentString;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public Date getRegDate() {
@@ -70,7 +70,7 @@ public class ProductReviewVO {
 	@Override
 	public String toString() {
 		return "ProductReviewVO [product_reviewid=" + product_reviewid + ", userid=" + userid + ", productid="
-				+ productid + ", score=" + score + ", contentString=" + contentString + ", regDate=" + regDate
+				+ productid + ", score=" + score + ", content=" + content + ", regDate=" + regDate
 				+ ", image_urls=" + image_urls + "]";
 	}
 
