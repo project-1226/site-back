@@ -2,10 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.ProductReviewMapper">
 	<select id="list_user" resultType="hashmap">
-		call ProductReview_userlist(#{userid}, #{page}, #{size});
+		select pr.*, date_format(pr.regdate,
+		'%Y-%m-%d %T') fmtdate, p.name, pd.count
+		from product_review pr, product p, purchase_detail pd
+		where pr.userid = #{userid} and pr.productid = p.productid and pr.productid = pd.productid
+	</select>
+	<select id="total" resultType="int">
+		select count(*) cnt
+		from
+		product_review
+		where userid = #{userid}
 	</select>
 	<select id="list_image" resultType="hashmap">
-		select * from image where product_reviewid = #{product_reviewid}
+		select * from image where
+		product_reviewid = #{product_reviewid}
 	</select>
 	<insert id="insert">
 		call ProductReview_insert(#{userid}, #{productid},

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.user.dao.ProductReviewDAO;
@@ -26,7 +27,15 @@ public class ProductReviewRestController {
 	}
 	
 	@GetMapping("/list")
-	public List<HashMap<String, Object>> list(@ModelAttribute ProductReviewVO vo) {
-		return dao.list(vo);
+	public HashMap<String, Object> list(@ModelAttribute("vo") ProductReviewVO vo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("list", dao.list(vo));
+		map.put("total", dao.total(vo));
+		return map;
+	}
+	
+	@GetMapping("/image")
+	public List<HashMap<String, Object>> image(@RequestParam("product_reviewid") int product_reviewid) {
+		return dao.image(product_reviewid);
 	}
 }
