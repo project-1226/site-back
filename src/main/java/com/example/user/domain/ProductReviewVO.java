@@ -9,9 +9,19 @@ public class ProductReviewVO {
 	private int score;
 	private String content;
 	private Date regDate;
+	private String image_names;
 	private String image_urls;
 	private int page;
 	private int size;
+
+
+	public String getImage_names() {
+		return image_names;
+	}
+
+	public void setImage_names(String image_names) {
+		this.image_names = image_names;
+	}
 
 	public int getPage() {
 		return page;
@@ -88,8 +98,7 @@ public class ProductReviewVO {
 	@Override
 	public String toString() {
 		return "ProductReviewVO [product_reviewid=" + product_reviewid + ", userid=" + userid + ", productid="
-				+ productid + ", score=" + score + ", content=" + content + ", regDate=" + regDate + ", image_urls="
-				+ image_urls + ", page=" + page + ", size=" + size + "]";
+				+ productid + ", score=" + score + ", content=" + content + ", regDate=" + regDate + ", image_names="
+				+ image_names + ", image_urls=" + image_urls + ", page=" + page + ", size=" + size + "]";
 	}
-
 }

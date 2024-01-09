@@ -36,4 +36,24 @@ public class ProductReviewDAOImpl implements ProductReviewDAO {
 		return session.selectList(namespace + ".list_image", product_reviewid);
 	}
 
+	@Override
+	public void deleteReview(int product_reviewid) {
+		session.delete(namespace + ".delete_review", product_reviewid);
+	}
+
+	@Override
+	public void deleteImage(int product_reviewid) {
+		session.delete(namespace + ".delete_image", product_reviewid);
+	}
+
+	@Override
+	public int isImage(int product_reviewid) {
+		return session.selectOne(namespace + ".count_image", product_reviewid);
+	}
+
+	@Override
+	public HashMap<String, Object> read(int product_reviewid) {
+		return session.selectOne(namespace + ".read", product_reviewid);
+	}
+
 }
