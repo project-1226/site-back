@@ -34,12 +34,9 @@ public class FoodDAOImpl implements FoodDAO{
 	public List<Map<String,Object>> categoryList(String type) {
 		return session.selectList(namespace+".categoryList",type);
 	}
-	
-	
 
 	@Override
-	public List<FoodVO> foodListOfCateg(String categoryid) {
-		
+	public List<FoodVO> foodListOfCateg(String categoryid) {		
 		return session.selectList(namespace+".foodListOfCateg",Integer.parseInt(categoryid));
 	}
 
