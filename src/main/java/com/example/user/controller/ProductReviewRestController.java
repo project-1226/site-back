@@ -17,7 +17,7 @@ import com.example.user.dao.ProductReviewDAO;
 import com.example.user.domain.ProductReviewVO;
 
 @RestController
-@RequestMapping("/product_review")
+@RequestMapping("/product-review")
 public class ProductReviewRestController {
 	@Autowired
 	ProductReviewDAO dao;
