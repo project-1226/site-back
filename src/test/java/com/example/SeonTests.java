@@ -73,5 +73,6 @@ class SeonTests {
 		// then
 		assertEquals(0, result);
 	}
+	
 
 }

@@ -4,16 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.api.APIDAO;
-import com.example.api.APIDAOImpl;
 import com.example.food.dao.FoodDAO;
 import com.example.food.dao.FoodDAOImpl;
 
 @SpringBootTest
 class BackApplicationTests {
 	
-	@Autowired
-	APIDAO repository = new APIDAOImpl();
+	
 	@Autowired
 	FoodDAO fooddao = new FoodDAOImpl();
 
