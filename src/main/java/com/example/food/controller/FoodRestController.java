@@ -20,12 +20,14 @@ public class FoodRestController {
 	FoodDAO dao;
 	
 	//카테고리 리스트
+	//type(health.disease -> 수정?)
 	@GetMapping("/categories/{type}")
 	public  List<Map<String,Object>> categoryList(@PathVariable("type") String type) {	
 		return dao.categoryList(type);
 	}
 	
 	//카테고리 리스트
+	//api수정해야함 health말고
 	@GetMapping("/health.list")
 	public  List<FoodVO> foodList(@RequestParam("categoryid") String categoryid) {	
 		return	dao.foodListOfCateg(categoryid);

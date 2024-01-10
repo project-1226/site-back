@@ -27,7 +27,10 @@ class FoodTest {
 	void categoryList() {
 		// given 
 		//health또는 disease
-		//when health
+		
+		//when 
+		//health
+		
 		// then
 		//db조회결과 콘솔 확인
 		fooddao.categoryList("health");
