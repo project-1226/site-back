@@ -38,7 +38,7 @@ class SeonTests {
 	ProductReviewVO pvo;
 
 	@Disabled("이 테스트는 필요하지 않습니다.")
-	@DisplayName("회원가입시 닉네임, 아바타 자동 설정 테스트")
+	@DisplayName("회원가입시 닉네임, 아바타 자동 설정")
 	@Test
 	@Transactional
 	void insertUserTest() {
@@ -74,5 +74,14 @@ class SeonTests {
 		assertEquals(0, result);
 	}
 	
-
+	@DisplayName("리뷰 수정")
+	@Test
+	@Transactional
+	void updateReviewTest() {
+		// given
+		
+		// when
+		
+		// then
+	}
 }
