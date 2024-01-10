@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.FoodMapper">
+    <select id="categoryList" resultType="hashmap">
+       select * from category 
+       <where>
+            <if test="type == 'health'">
+                categoryid BETWEEN 14 AND 22
+            </if>
+            <if test="type == 'disease'">
+                categoryid BETWEEN 1 AND 11
+            </if>
+        </where>
+    </select>
+    <select id="foodListOfCateg" resultType="com.example.food.domain.FoodVO">
+       select f.* from food_categories fc,food f where fc.foodid = f.foodid and fc.categoryid =#{categoryid}
+       ORDER BY RAND()
+	   LIMIT 6;
+    </select>
+</mapper>
