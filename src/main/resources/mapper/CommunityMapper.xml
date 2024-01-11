@@ -8,7 +8,7 @@
     </select>
     <insert id="insert_post">
     	insert into post(categoryid, userid, title, content)
-    	values(#{categoryid}, #{userid}, #{title}, #{content);
+    	values(#{categoryid}, #{userid}, #{title}, #{content});
     </insert>
     <select id="read" resultType="hashmap">
     	select *
@@ -18,14 +18,27 @@
     <update id="update_post">
     	update post
     	set title = #{title}, content = #{content}
-    	where categoryid = #{categoryid} and postid = #{postid}
+    	where categoryid = #{categoryid} and postid = #{postid};
     </update>
+    <delete id="delete">
+    	delete from post where postid = #{postid};
+    </delete>
     <select id="list_comment" resultType="hashmap">
     	select *
     	from comment;
     </select>
+    <select id="read_comment" resultType="hashmap">
+    	select *
+    	from comment
+    	where postid = #{postid};
+    </select>
     <insert id="insert_comment">
-    	insert into comment(userid, content)
-    	values(#{userid}, #{content})
+    	insert into comment(content)
+    	values(#{content});
     </insert>
+    <update id="update_comment">
+    	update comment
+    	set content = #{content}
+    	where commentid = #{commentid};
+    </update>
 </mapper>

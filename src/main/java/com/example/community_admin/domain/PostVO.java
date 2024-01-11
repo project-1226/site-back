@@ -1,4 +1,4 @@
-package com.example.community.domain;
+package com.example.community_admin.domain;
 
 import java.util.Date;
 
