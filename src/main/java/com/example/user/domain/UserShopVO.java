@@ -8,6 +8,14 @@ import lombok.ToString;
 @Setter
 @ToString
 public class UserShopVO {
+	private int purchaseid;
+	private String orderid;
+	private int addressid;
+	private String userid;
+	private int totalprice;
+	private String card;
+	private int status; // 0:결제대기중 1:결제완료 2:배송준비중 3:배송중 4:배송완료 5:구매확정
+	private String request;
 	
 	private int page;
 	private int size;
