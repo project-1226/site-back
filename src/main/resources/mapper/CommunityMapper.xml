@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CommunityMapper">
+    <select id="list" resultType="hashmap">
+        select *
+        from post
+        where categoryid = #{categoryid};
+    </select>
+    <insert id="insert_post">
+    	insert into post(categoryid, userid, title, content)
+    	values(#{categoryid}, #{userid}, #{title}, #{content});
+    </insert>
+    <select id="read" resultType="hashmap">
+    	select *
+    	from post
+    	where postid = #{postid};
+    </select>
+    <update id="update_post">
+    	update post
+    	set title = #{title}, content = #{content}
+    	where categoryid = #{categoryid} and postid = #{postid};
+    </update>
+    <delete id="delete">
+    	delete from post where postid = #{postid};
+    </delete>
+    <select id="list_comment" resultType="hashmap">
+    	select *
+    	from comment;
+    </select>
+    <select id="read_comment" resultType="hashmap">
+    	select *
+    	from comment
+    	where postid = #{postid};
+    </select>
+    <insert id="insert_comment">
+    	insert into comment(content)
+    	values(#{content});
+    </insert>
+    <update id="update_comment">
+    	update comment
+    	set content = #{content}
+    	where commentid = #{commentid};
+    </update>
+</mapper>
