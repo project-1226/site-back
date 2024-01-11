@@ -13,7 +13,7 @@
         </where>
     </select>
     <select id="foodListOfCateg" resultType="com.example.food.domain.FoodVO">
-       select f.* from food_categories fc,food f where fc.foodid = f.foodid and fc.categoryid =#{categoryid}
+       select fc.categoryid,f.* from food_categories fc,food f where fc.foodid = f.foodid and fc.categoryid =#{categoryid}
        ORDER BY RAND()
 	   LIMIT 6;
     </select>
