@@ -28,7 +28,7 @@ public class FoodRestController {
 	
 	//카테고리 리스트
 	//api수정해야함 health말고
-	@GetMapping("/health.list")
+	@GetMapping("/list")
 	public  List<FoodVO> foodList(@RequestParam("categoryid") String categoryid) {	
 		return	dao.foodListOfCateg(categoryid);
 	}
