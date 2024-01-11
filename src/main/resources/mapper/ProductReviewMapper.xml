@@ -6,6 +6,7 @@
 		'%Y-%m-%d %T') fmtdate, p.name, pd.count
 		from product_review pr, product p, purchase_detail pd
 		where pr.userid = #{userid} and pr.productid = p.productid and pr.productid = pd.productid
+		order by regdate desc
 	</select>
 	<select id="total" resultType="int">
 		select count(*) cnt
@@ -13,12 +14,30 @@
 		product_review
 		where userid = #{userid}
 	</select>
+	<select id="read" resultType="hashmap">
+		select *, date_format(regdate, '%Y-%m-%d %T') fmtdate
+		from product_review
+		where product_reviewid;
+	</select>
 	<select id="list_image" resultType="hashmap">
 		select * from image where
 		product_reviewid = #{product_reviewid}
 	</select>
+	<select id="count_image" resultType="int">
+		select count(*) cnt
+		from image
+		where product_reviewid = #{product_reviewid}
+	</select>
 	<insert id="insert">
 		call ProductReview_insert(#{userid}, #{productid},
-		#{score}, #{content}, #{image_urls})
+		#{score}, #{content}, #{image_names}, #{image_urls})
 	</insert>
+	<delete id="delete_review">
+		delete from product_review
+		where product_reviewid = #{product_reviewid}
+	</delete>
+	<delete id="delete_image">
+		delete from image
+		where product_reviewid = #{product_reviewid}
+	</delete>
 </mapper>

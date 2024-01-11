@@ -9,18 +9,22 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AddressVO {
-	private int addressid;
+public class UserActivityVO {
+//	공통
+	private int postid;
 	private String userid;
-	private int selected;
-	private String recipient;
-	private String recipient_phone;
-	private String address1;
-	private String address2;
-	private String address3;
+	private String content;
 	private Date regdate;
-	private int start;
+	
 	private int page;
 	private int size;
-
+	private int start;
+	private String query;
+	
+//	post
+	private int categoryid;
+	private String title;
+	
+//	comment 관련
+	private int commentid;
 }
