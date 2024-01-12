@@ -8,13 +8,13 @@
     </select>
     <select id="list_fproduct" resultType="hashmap">
         select *, date_format(regdate, '%Y-%m-%d %T') fmtdate, format(price, 0) fmtprice
-        from user_favorite_product_list
+        from view_favorite_product
         where userid = #{userid}
         order by regdate desc
         limit #{start}, #{size};
     </select>
     <select id="total_fproduct" resultType="int">
-    	select count(*) from user_favorite_product_list
+    	select count(*) from view_favorite_product
     	where userid = #{userid}
     </select>
     <delete id="delete">
