@@ -17,8 +17,20 @@ public class UserShopDAOImpl implements UserShopDAO {
 	String namespace="com.example.mapper.UserShopMapper";
 
 	@Override
-	public List<HashMap<String, Object>> list(UserShopVO vo) {
+	public List<HashMap<String, Object>> listPurchase(UserShopVO vo) {
+		vo.setStart((vo.getPage() - 1) * vo.getSize());
 		return session.selectList(namespace + ".list_purchase", vo);
+	}
+
+	@Override
+	public int total(String userid) {
+		return session.selectOne(namespace + ".total_purchase", userid);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> listDetail(UserShopVO vo) {
+		vo.setStart((vo.getPage() - 1) * vo.getSize());
+		return session.selectList(namespace + ".list_detail", vo);
 	}
 
 }

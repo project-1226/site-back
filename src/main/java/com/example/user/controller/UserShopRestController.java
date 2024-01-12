@@ -13,13 +13,21 @@ import com.example.user.dao.UserShopDAO;
 import com.example.user.domain.UserShopVO;
 
 @RestController
-@RequestMapping("/user-purchase")
+@RequestMapping("/usershop")
 public class UserShopRestController {
 	@Autowired
 	UserShopDAO dao;
 
-	@GetMapping("/list")
-	public List<HashMap<String, Object>> list(@ModelAttribute("vo") UserShopVO vo) {
-		return dao.list(vo);
+	@GetMapping("/list-purchase")
+	public HashMap<String, Object> listPurchase(@ModelAttribute("vo") UserShopVO vo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("list", dao.listPurchase(vo));
+		map.put("total", dao.total(vo.getUserid()));
+		return map;
+	}
+	
+	@GetMapping("/list-detail")
+	public List<HashMap<String, Object>> listDetail(@ModelAttribute("vo") UserShopVO vo) {
+		return dao.listDetail(vo);
 	}
 }
