@@ -30,9 +30,27 @@ public class ProductReviewRestController {
 	@GetMapping("/list")
 	public HashMap<String, Object> list(@ModelAttribute("vo") ProductReviewVO vo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("list", dao.list(vo));
-		map.put("total", dao.total(vo));
+		map.put("list", dao.listReviewO(vo));
+		map.put("total", dao.total(vo.getUserid()));
 		return map;
+	}
+	
+	@GetMapping("/list-review-x")
+	public HashMap<String, Object> listReviewX(@ModelAttribute("vo") ProductReviewVO vo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("list", dao.listReviewX(vo));
+		map.put("total", dao.totalReviewX(vo.getUserid()));
+		return map;
+	}
+	
+	@GetMapping("/reviewOCnt")
+	public int reviewOCnt(@RequestParam("userid") String userid) {
+		return dao.total(userid);
+	}
+	
+	@GetMapping("/reviewXCnt")
+	public int reviewXCnt(@RequestParam("userid") String userid) {
+		return dao.totalReviewX(userid);
 	}
 	
 	@GetMapping("/read")

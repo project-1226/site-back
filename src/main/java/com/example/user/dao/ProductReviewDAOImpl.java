@@ -22,13 +22,13 @@ public class ProductReviewDAOImpl implements ProductReviewDAO {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> list(ProductReviewVO vo) {	
+	public List<HashMap<String, Object>> listReviewO(ProductReviewVO vo) {	
 		return session.selectList(namespace + ".list_user", vo);
 	}
 	
 	@Override
-	public int total(ProductReviewVO vo) {
-		return session.selectOne(namespace + ".total", vo);
+	public int total(String userid) {
+		return session.selectOne(namespace + ".total", userid);
 	}
 
 	@Override
@@ -54,6 +54,16 @@ public class ProductReviewDAOImpl implements ProductReviewDAO {
 	@Override
 	public HashMap<String, Object> read(int product_reviewid) {
 		return session.selectOne(namespace + ".read", product_reviewid);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> listReviewX(ProductReviewVO vo) {
+		return session.selectList(namespace + ".require_review", vo);
+	}
+
+	@Override
+	public int totalReviewX(String userid) {
+		return session.selectOne(namespace + ".total_require_review", userid);
 	}
 
 }
