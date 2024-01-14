@@ -8,4 +8,9 @@
     <select id="sList" resultType="hashmap">
         select * from survey_s;
     </select>
+    
+	<insert id="insertResult">
+	    insert into survey_result (selectid, userid, questionid, input_text)
+	    values (#{selectid}, #{userid}, #{questionid}, #{input_text})
+	</insert>
 </mapper>

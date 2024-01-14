@@ -24,4 +24,10 @@ public class SurveyDAOImpl implements SurveyDAO{
 		return session.selectList(namespace+".sList");
 	}
 
+	@Override
+	public int insertResult(List<HashMap<String, Object>> insertResult) {
+		return session.insert(namespace+".insertResult", insertResult);
+		
+	}
+
 }
