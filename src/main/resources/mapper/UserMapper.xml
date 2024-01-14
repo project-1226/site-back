@@ -29,4 +29,11 @@
 		#{userid}
 	</update>
 
+	<select id="list_myexcercise" resultType="hashmap">
+		select c.categoryid,
+		c.name categoryname, e.excerciseid, e.name excercisename
+		from my_exercise_plan mep, category c, exercise e
+		where userid= #{userid} and mep.categoryid = c.categoryid and
+		mep.excerciseid = e.excerciseid;
+	</select>
 </mapper>

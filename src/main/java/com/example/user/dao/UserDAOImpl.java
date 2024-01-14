@@ -1,6 +1,7 @@
 package com.example.user.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.ibatis.session.SqlSession;
@@ -67,6 +68,11 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public int isUser(UserVO vo) {
 		return session.selectOne(namespace + ".count_read", vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> listMyExcercise(String userid) {
+		return session.selectList(namespace + ".list_myexcercise", userid);
 	}
 
 }
