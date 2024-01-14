@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +27,12 @@ public class SurveyRestController {
 	@GetMapping("/s_list")
 	public List<HashMap<String,Object>> sList(){	
 		return dao.sList();
+	}
+	
+	//설문조사 결과저장
+	@PostMapping("/insertResult")
+	public int insertResult(@RequestBody List<HashMap<String, Object>> surveyResultList) {
+		return dao.insertResult(surveyResultList);
 	}
 
 }
