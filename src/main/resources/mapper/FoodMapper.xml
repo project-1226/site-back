@@ -10,10 +10,13 @@
             <if test="type == 'disease'">
                 categoryid BETWEEN 1 AND 11
             </if>
+            <if test="type == 'exercise'">
+                categoryid BETWEEN 50 AND 58 ORDER BY RAND()
+            </if>
         </where>
     </select>
     <select id="foodListOfCateg" resultType="com.example.food.domain.FoodVO">
-       select fc.categoryid,f.* from food_categories fc,food f where fc.foodid = f.foodid and fc.categoryid =#{categoryid}
+       select fc.categoryid,f.* from food_exercise_category_mapping fc,food f where fc.foodid = f.foodid and fc.categoryid =#{categoryid}
        ORDER BY RAND()
 	   LIMIT 6;
     </select>
