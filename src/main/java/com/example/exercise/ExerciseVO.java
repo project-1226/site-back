@@ -8,6 +8,9 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ExerciseVO {
+	private String userid;
+	private int categoryid;
 	private int excerciseid;
-	private String name;	
+	private String name;
+	private int ai;
 }
