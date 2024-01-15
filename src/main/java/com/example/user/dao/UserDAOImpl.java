@@ -71,8 +71,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> listMyExcercise(String userid) {
-		return session.selectList(namespace + ".list_myexcercise", userid);
+	public List<HashMap<String, Object>> readUserSurvey(String userid) {
+		return session.selectList(namespace + ".read_user_survey", userid);
 	}
 
 }

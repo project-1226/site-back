@@ -11,5 +11,5 @@ public interface UserDAO {
 	public void insert(UserVO vo);
 	public void update(UserVO vo);
 	
-	public List<HashMap<String, Object>> listMyExcercise(String userid);
+	public List<HashMap<String, Object>> readUserSurvey(String userid);
 }
