@@ -1,6 +1,8 @@
 package com.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -16,11 +18,15 @@ import com.example.user.dao.UserDAO;
 import com.example.user.domain.AddressVO;
 import com.example.user.domain.ProductReviewVO;
 import com.example.user.domain.UserVO;
+import com.example.user.service.UserService;
 
 @SpringBootTest
 class SeonTests {
 	@Autowired
 	UserDAO udao;
+	
+	@Autowired
+	UserService uservice;
 
 	@Autowired
 	AddressDAO adao;
@@ -74,14 +80,26 @@ class SeonTests {
 		assertEquals(0, result);
 	}
 	
-	@DisplayName("리뷰 수정")
+	@DisplayName("사용자 설문 업데이트 또는 추가를 위한 날짜 일치 여부 확인")
 	@Test
 	@Transactional
-	void updateReviewTest() {
-		// given
+	void changeUserSurveyTest() {
+		//given
+		UserVO vo = new UserVO();
+        vo.setUserid("e91b8eb6-24af-404a-b");
+        vo.setQuestionid(9);
+        vo.setInput_text("58");
 		
-		// when
+		//when
+        HashMap<String, Object> survey = udao.getUserSurvey(vo);
 		
-		// then
+		//then
+        assertEquals("58", survey.get("input_text").toString());
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String expectedRegdateStr = "2024-01-15";
+        String actualRegdateStr = dateFormat.format(survey.get("regdate"));
+
+        assertEquals(expectedRegdateStr, actualRegdateStr);
 	}
 }

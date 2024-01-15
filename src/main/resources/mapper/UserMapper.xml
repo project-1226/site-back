@@ -29,11 +29,41 @@
 		#{userid}
 	</update>
 
-	<select id="list_myexcercise" resultType="hashmap">
-		select c.categoryid,
-		c.name categoryname, e.excerciseid, e.name excercisename
-		from my_exercise_plan mep, category c, exercise e
-		where userid= #{userid} and mep.categoryid = c.categoryid and
-		mep.excerciseid = e.excerciseid;
+	<select id="read_user_survey" resultType="hashmap">
+		select vus.userid,
+		u.nickname, vus.questionid, q.content, vus.selectid, s.answer,
+		vus.input_text, vus.regdate
+		from view_user_survey vus, survey_q q,
+		survey_s s, user u
+		where vus.selectid = s.selectid and vus.questionid =
+		q.questionid and
+		vus.userid = u.userid and vus.userid = #{userid};
+	</select>
+	<select id="get_user_survey" resultType="hashmap">
+		select * from
+		view_user_survey
+		where userid = #{userid} and questionid =
+		#{questionid}
+	</select>
+	<select id="is_duplicate" resultType="int">
+		select count(*) from result
+		where userid = #{userid} and questionid = #{questionid} and regdate =
+		#{regdate}
+	</select>
+	<update id="update_user_survey">
+		update result set selectid = #{selectid}, input_text
+		= #{input_text}
+		where userid = #{userid} and questionid = #{questionid}
+		and regdate = #{regdate, javaType=java.util.Date, jdbcType=DATE}
+	</update>
+	<insert id="insert_user_survey">
+		<![CDATA[
+    		insert into result(selectid, userid, questionid, input_text, regdate)
+    		values(#{selectid}, #{userid}, #{questionid}, #{input_text}, #{regdate, javaType=java.util.Date, jdbcType=DATE})
+    	]]>
+	</insert>
+	<select id="list_allergy" resultType="hashmap">
+		select * from survey_s
+		where questionid = 4;
 	</select>
 </mapper>

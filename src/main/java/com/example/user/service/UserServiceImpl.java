@@ -1,5 +1,7 @@
 package com.example.user.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +26,24 @@ public class UserServiceImpl implements UserService {
 	        throw new RuntimeException("User with this email already exists");
 	    }
 	}
+
+	@Transactional
+	@Override
+	public void changeUserSurvey(UserVO vo) {
+		HashMap<String, Object> survey = dao.getUserSurvey(vo);
+		
+		Date currentDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentRegdateStr = dateFormat.format(currentDate);
+        String prevRegdateStr = dateFormat.format(survey.get("regdate"));
+        
+        vo.setRegdate(new Date());
+
+        if (currentRegdateStr.equals(prevRegdateStr)) {
+            dao.updateUserSurvey(vo);
+        } else {
+            dao.insertUserSurvey(vo);
+        }
+	}
+	
 }
