@@ -75,4 +75,29 @@ public class UserDAOImpl implements UserDAO {
 		return session.selectList(namespace + ".read_user_survey", userid);
 	}
 
+	@Override
+	public void updateUserSurvey(UserVO vo) {
+		session.update(namespace + ".update_user_survey", vo);
+	}
+
+	@Override
+	public void insertUserSurvey(UserVO vo) {
+		session.insert(namespace + ".insert_user_survey", vo);
+	}
+
+	@Override
+	public HashMap<String, Object> getUserSurvey(UserVO vo) {
+		return session.selectOne(namespace + ".get_user_survey", vo);
+	}
+
+	@Override
+	public int isDuplicate(UserVO vo) {
+		return session.selectOne(namespace + ".is_duplicate", vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> listAllergy() {
+		return session.selectList(namespace + ".list_allergy");
+	}
+
 }

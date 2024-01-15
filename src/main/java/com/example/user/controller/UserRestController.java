@@ -62,5 +62,15 @@ public class UserRestController {
 	public List<HashMap<String, Object>> readUserSurvey(@RequestParam("userid") String userid) {
 		return dao.readUserSurvey(userid);
 	}
+	
+	@PostMapping("/survey/change")
+	public void changeUserSurvey(@RequestBody UserVO vo) {
+		service.changeUserSurvey(vo);
+	}
+	
+	@GetMapping("/list-allergy")
+	public List<HashMap<String, Object>> listAllergy() {
+		return dao.listAllergy();
+	}
 
 }

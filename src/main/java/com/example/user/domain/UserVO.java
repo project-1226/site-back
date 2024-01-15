@@ -18,4 +18,8 @@ public class UserVO {
 	private String avatar;
 	private int point;
 	private Date regdate;
+	
+	private int questionid;
+	private int selectid;
+    private String input_text;
 }
