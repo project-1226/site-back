@@ -18,7 +18,7 @@ public class UserDAOImpl implements UserDAO {
 	String namespace = "com.example.mapper.UserMapper";
 
 	@Override
-	public void insert(UserVO vo) {
+	public String insert(UserVO vo) {
 		// userid 자동 생성
 	    boolean isDuplicate = true;
 	    String userid;
@@ -53,6 +53,8 @@ public class UserDAOImpl implements UserDAO {
 	    vo.toString();
 
 	    session.insert(namespace + ".insert", vo);
+	    return vo.getUserid();
+	    
 	}
 
 	@Override

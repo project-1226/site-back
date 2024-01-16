@@ -11,5 +11,5 @@ public class AnswerVO {
     private int selectid;
     private String userid;
     private int questionid;
-    private String inputText;
+    private String input_text;
 }
