@@ -37,7 +37,8 @@
 		survey_s s, user u
 		where vus.selectid = s.selectid and vus.questionid =
 		q.questionid and
-		vus.userid = u.userid and vus.userid = #{userid};
+		vus.userid = u.userid and vus.userid = #{userid}
+		order by vus.questionid;
 	</select>
 	<select id="get_user_survey" resultType="hashmap">
 		select * from

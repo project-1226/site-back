@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,7 +27,7 @@ public class SurveyDAOImpl implements SurveyDAO{
 	}
 
 	@Override
-	public int insertResult(List<HashMap<String, Object>> insertResult) {
+	public int insertResult(List<AnswerVO> insertResult) {
 		return session.insert(namespace+".insertResult", insertResult);
 		
 	}

@@ -8,7 +8,7 @@ import com.example.user.domain.UserVO;
 public interface UserDAO {
 	public HashMap<String, Object> read(UserVO vo);
 	public int isUser(UserVO vo);
-	public void insert(UserVO vo);
+	public String insert(UserVO vo);
 	public void update(UserVO vo);
 	
 	public List<HashMap<String, Object>> readUserSurvey(String userid);

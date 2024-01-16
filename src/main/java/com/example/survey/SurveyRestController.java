@@ -30,8 +30,8 @@ public class SurveyRestController {
 	}
 	
 	//설문조사 결과저장
-	@PostMapping("/insertResult")
-	public int insertResult(@RequestBody List<HashMap<String, Object>> surveyResultList) {
+	@PostMapping("/insert_result")
+	public int insertResult(@RequestBody List<AnswerVO>  surveyResultList) {
 		return dao.insertResult(surveyResultList);
 	}
 

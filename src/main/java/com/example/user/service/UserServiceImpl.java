@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.survey.AnswerVO;
+import com.example.survey.SurvetInsertDTO;
+import com.example.survey.SurveyDAO;
 import com.example.user.dao.UserDAO;
 import com.example.user.domain.UserVO;
 
@@ -16,13 +19,34 @@ import com.example.user.domain.UserVO;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	UserDAO dao;
+	
+	@Autowired
+	SurveyDAO sdao;
 
 	@Transactional
 	@Override
-	public void insert(UserVO vo) {
-		HashMap<String, Object> user = dao.read(vo);
-		if(user == null) {
-			dao.insert(vo);
+	public void insert(SurvetInsertDTO requestData) {
+		UserVO user = (UserVO) requestData.getUser();
+		List<AnswerVO> answers = (List<AnswerVO>) requestData.getResult();
+		System.out.println(user.toString());
+		for (AnswerVO answer : answers) {           
+            System.out.println("------------"+answer.toString());
+        }
+		
+		
+		HashMap<String, Object> read_user = dao.read(user);
+		if(read_user == null) {
+			String new_userid =  dao.insert(user);
+			
+			System.out.println("!!!!!!!!!"+new_userid);
+			
+			for (AnswerVO answer : answers) {
+	            answer.setUserid(new_userid);
+	            System.out.println("------------"+answer.toString());
+	        }
+			
+			sdao.insertResult(answers);
+			
 		} else {
 	        throw new RuntimeException("User with this email already exists");
 	    }
