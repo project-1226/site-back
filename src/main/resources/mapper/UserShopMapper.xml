@@ -52,7 +52,7 @@
 		values(#{purchasedetailid}, #{content})
 	</insert>
 	<select id="list_return" resultType="hashmap">
-		select * from view_purchase_return where userid = #{userid}
+		select *, format(price, 0) fmtprice from view_purchase_return where userid = #{userid}
 	</select>
 	<select id="count_return" resultType="int">
 		select count(*) from view_purchase_return where userid = #{userid}
