@@ -3,6 +3,7 @@ package com.example.user.service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,9 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@Override
 	public void changeUserSurvey(UserVO vo) {
-		HashMap<String, Object> survey = dao.getUserSurvey(vo);
+		List<HashMap<String, Object>> surveyList = dao.getUserSurvey(vo);
+		
+		HashMap<String, Object> survey = surveyList.isEmpty() ? new HashMap<>() : surveyList.get(0);
 		
 		Date currentDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

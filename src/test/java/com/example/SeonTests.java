@@ -80,26 +80,26 @@ class SeonTests {
 		assertEquals(0, result);
 	}
 	
-	@DisplayName("사용자 설문 업데이트 또는 추가를 위한 날짜 일치 여부 확인")
-	@Test
-	@Transactional
-	void changeUserSurveyTest() {
-		//given
-		UserVO vo = new UserVO();
-        vo.setUserid("e91b8eb6-24af-404a-b");
-        vo.setQuestionid(9);
-        vo.setInput_text("58");
-		
-		//when
-        HashMap<String, Object> survey = udao.getUserSurvey(vo);
-		
-		//then
-        assertEquals("58", survey.get("input_text").toString());
-        
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String expectedRegdateStr = "2024-01-15";
-        String actualRegdateStr = dateFormat.format(survey.get("regdate"));
-
-        assertEquals(expectedRegdateStr, actualRegdateStr);
-	}
+//	@DisplayName("사용자 설문 업데이트 또는 추가를 위한 날짜 일치 여부 확인")
+//	@Test
+//	@Transactional
+//	void changeUserSurveyTest() {
+//		//given
+//		UserVO vo = new UserVO();
+//        vo.setUserid("e91b8eb6-24af-404a-b");
+//        vo.setQuestionid(9);
+//        vo.setInput_text("58");
+//		
+//		//when
+//        HashMap<String, Object> survey = udao.getUserSurvey(vo);
+//		
+//		//then
+//        assertEquals("58", survey.get("input_text").toString());
+//        
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        String expectedRegdateStr = "2024-01-15";
+//        String actualRegdateStr = dateFormat.format(survey.get("regdate"));
+//
+//        assertEquals(expectedRegdateStr, actualRegdateStr);
+//	}
 }

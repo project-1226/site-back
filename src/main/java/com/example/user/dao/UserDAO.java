@@ -12,7 +12,7 @@ public interface UserDAO {
 	public void update(UserVO vo);
 	
 	public List<HashMap<String, Object>> readUserSurvey(String userid);
-	public HashMap<String, Object> getUserSurvey(UserVO vo);
+	public List<HashMap<String, Object>> getUserSurvey(UserVO vo);
 	public int isDuplicate(UserVO vo);
 	public List<HashMap<String, Object>> listAllergy();
 	public void updateUserSurvey(UserVO vo);
