@@ -48,7 +48,7 @@
 	<select id="is_duplicate" resultType="int">
 		select count(*) from result
 		where userid = #{userid} and questionid = #{questionid} and regdate =
-		#{regdate}
+		#{regdate, javaType=java.util.Date, jdbcType=DATE}
 	</select>
 	<update id="update_user_survey">
 		update result set selectid = #{selectid}, input_text
@@ -62,6 +62,7 @@
     		values(#{selectid}, #{userid}, #{questionid}, #{input_text}, #{regdate, javaType=java.util.Date, jdbcType=DATE})
     	]]>
 	</insert>
+	
 	<select id="list_allergy" resultType="hashmap">
 		select * from survey_s
 		where questionid = 4;

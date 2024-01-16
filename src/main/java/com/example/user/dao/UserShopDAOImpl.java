@@ -33,4 +33,24 @@ public class UserShopDAOImpl implements UserShopDAO {
 		return session.selectList(namespace + ".list_detail", vo);
 	}
 
+	@Override
+	public List<HashMap<String, Object>> readDetail(String purchaseid) {
+		return session.selectList(namespace + ".read_detail", purchaseid);
+	}
+
+	@Override
+	public void insertReturn(UserShopVO vo) {
+		session.insert(namespace + ".insert_return", vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> listReturn(String userid) {
+		return session.selectList(namespace + ".list_return", userid);
+	}
+
+	@Override
+	public int countReturn(String userid) {
+		return session.selectOne(namespace + ".count_return", userid);
+	}
+
 }

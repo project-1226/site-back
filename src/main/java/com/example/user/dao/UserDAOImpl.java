@@ -86,8 +86,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public HashMap<String, Object> getUserSurvey(UserVO vo) {
-		return session.selectOne(namespace + ".get_user_survey", vo);
+	public List<HashMap<String, Object>> getUserSurvey(UserVO vo) {
+		return session.selectList(namespace + ".get_user_survey", vo);
 	}
 
 	@Override
