@@ -34,9 +34,9 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	@Override
-	public void delete(CartVO vo) {
+	public void delete(int cartid) {
 		// TODO Auto-generated method stub
-		session.delete(namespace + ".delete", vo);
+		session.delete(namespace + ".delete", cartid);
 	}
 
 	@Override 
