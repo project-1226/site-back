@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.AdminMapper">
+    <insert id="insert">
+    	insert into post(categoryid, userid, title, content)
+    	values(#{categoryid}, #{userid}, #{title}, #{content});
+    </insert>
+    <select id="list" resultType="hashmap">
+    	select *
+    	from post
+    	where categoryid = #{categoryid}
+    </select>
+    <update id="update">
+    	update post
+    	set title = #{title}, content = #{content}
+    	where postid = #{postid}
+    </update>
+    <select id="userList" resultType="hashmap">
+    	select *
+    	from user
+    </select>
+    <insert id="insertProduct">
+    	insert into product(name, price, content)
+    	values(#{name}, #{price}, #{content});
+    </insert>
+    <insert id="insertProR">
+    	call ProductRegister(#{name}, #{price}, #{content}, #{image_names}, #{image_urls});
+    </insert>
+    <update id="updateProduct">
+    	update product
+    	set name = #{name}, price = #{price}, content = #{content}
+    	where productid = #{productid}
+    </update>
+    
+</mapper>
