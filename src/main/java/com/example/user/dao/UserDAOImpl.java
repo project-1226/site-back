@@ -1,6 +1,7 @@
 package com.example.user.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,7 +18,7 @@ public class UserDAOImpl implements UserDAO {
 	String namespace = "com.example.mapper.UserMapper";
 
 	@Override
-	public void insert(UserVO vo) {
+	public String insert(UserVO vo) {
 		// userid 자동 생성
 	    boolean isDuplicate = true;
 	    String userid;
@@ -52,6 +53,8 @@ public class UserDAOImpl implements UserDAO {
 	    vo.toString();
 
 	    session.insert(namespace + ".insert", vo);
+	    return vo.getUserid();
+	    
 	}
 
 	@Override
@@ -67,6 +70,36 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public int isUser(UserVO vo) {
 		return session.selectOne(namespace + ".count_read", vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> readUserSurvey(String userid) {
+		return session.selectList(namespace + ".read_user_survey", userid);
+	}
+
+	@Override
+	public void updateUserSurvey(UserVO vo) {
+		session.update(namespace + ".update_user_survey", vo);
+	}
+
+	@Override
+	public void insertUserSurvey(UserVO vo) {
+		session.insert(namespace + ".insert_user_survey", vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getUserSurvey(UserVO vo) {
+		return session.selectList(namespace + ".get_user_survey", vo);
+	}
+
+	@Override
+	public int isDuplicate(UserVO vo) {
+		return session.selectOne(namespace + ".is_duplicate", vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> listAllergy() {
+		return session.selectList(namespace + ".list_allergy");
 	}
 
 }

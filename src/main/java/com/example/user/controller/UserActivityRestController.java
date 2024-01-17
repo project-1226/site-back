@@ -25,6 +25,16 @@ public class UserActivityRestController {
 		return map;
 	}
 	
+	@GetMapping("/total-post")
+	public int totalPost(@ModelAttribute("vo") UserActivityVO vo) {
+		return dao.totalPost(vo);
+	}
+	
+	@GetMapping("/total-comment")
+	public int totalComment(@ModelAttribute("vo") UserActivityVO vo) {
+		return dao.totalPost(vo);
+	}
+	
 	@GetMapping("/count-comment")
 	public int countComment(@ModelAttribute("vo") UserActivityVO vo) {
 		return dao.countComment(vo);

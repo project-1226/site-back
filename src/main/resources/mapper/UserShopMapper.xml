@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserShopMapper">
+	<select id="list_purchase" resultType="hashmap">
+		select *,
+		format(totalprice, 0) fmtsum, date_format(regdate,
+		'%Y. %m. %d')
+		fmtdate, case
+		when(status = 0) then '결제확인중'
+		when(status = 1) then '결제완료'
+		when(status = 2) then '배송준비중'
+		when(status = 3) then '배송중'
+		when(status =
+		4) then '배송완료'
+		end as str_status from purchase
+		where userid = #{userid}
+		order by purchaseid desc
+		limit #{start},
+		#{size}
+	</select>
+	<select id="total_purchase" resultType="int">
+		select count(*) from
+		purchase where userid = #{userid}
+	</select>
+	<select id="list_detail" resultType="hashmap">
+		select pd.*, p.name,
+		format(p.price, 0)
+		product_price, p.content, i.imageid, i.image_name,
+		i.image_url
+		from
+		product p, purchase_detail pd, image i
+		where p.productid
+		= pd.productid
+		and pd.productid = i.productid and
+		pd.purchaseid =
+		#{purchaseid}
+		and p.name like concat('%', #{query}, '%')
+		order by
+		pd.purchasedetailid desc
+	</select>
+
+	<select id="read_detail" resultType="hashmap">
+		select pd.*, format(pd.price, 0) fmtprice, p.name,
+		i.image_url
+		from purchase_detail pd, product p, image i
+		where purchaseid = #{purchaseid} and pd.productid = p.productid and pd.productid =
+		i.productid
+		order by pd.purchasedetailid desc
+	</select>
+	<insert id="insert_return">
+		insert into purchase_return(purchasedetailid, content)
+		values(#{purchasedetailid}, #{content})
+	</insert>
+	<select id="list_return" resultType="hashmap">
+		select *, format(price, 0) fmtprice from view_purchase_return where userid = #{userid}
+	</select>
+	<select id="count_return" resultType="int">
+		select count(*) from view_purchase_return where userid = #{userid}
+	</select>
+</mapper>

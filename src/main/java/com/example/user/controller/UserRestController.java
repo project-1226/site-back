@@ -1,6 +1,7 @@
 package com.example.user.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,8 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.survey.SurvetInsertDTO;
 import com.example.user.dao.UserDAO;
 import com.example.user.domain.UserVO;
 import com.example.user.service.UserService;
@@ -29,8 +32,14 @@ public class UserRestController {
 	}
 	
 	@PostMapping("/insert")
-	public void insert(@RequestBody UserVO vo) {
-		service.insert(vo);
+	public void insert(@RequestBody SurvetInsertDTO requestData) {
+		System.out.println(requestData);
+		System.out.println(requestData.getClass().getTypeName());
+		
+//		String result=requestData.toString();
+//		JSONObject object= result
+		
+		service.insert(requestData);
 	}
 	
 	@PostMapping("/login")
@@ -55,4 +64,20 @@ public class UserRestController {
 	public void update(@RequestBody UserVO vo) {
 		dao.update(vo);
 	}
+	
+	@GetMapping("/survey/read")
+	public List<HashMap<String, Object>> readUserSurvey(@RequestParam("userid") String userid) {
+		return dao.readUserSurvey(userid);
+	}
+	
+	@PostMapping("/survey/change")
+	public void changeUserSurvey(@RequestBody UserVO vo) {
+		service.changeUserSurvey(vo);
+	}
+	
+	@GetMapping("/list-allergy")
+	public List<HashMap<String, Object>> listAllergy() {
+		return dao.listAllergy();
+	}
+
 }
