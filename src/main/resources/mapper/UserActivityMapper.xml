@@ -4,14 +4,14 @@
 	<select id="list_post" resultType="hashmap">
 		select *, date_format(regdate, '%Y-%m-%d %T') fmtdate
 		from post
-		where userid = #{userid}
+		where userid = #{userid} and categoryid = 102
 		order by regdate desc
 		limit #{start}, #{size}
 	</select>
 	<select id="total_post" resultType="int">
 		select count(*)
 		from post
-		where userid = #{userid}
+		where userid = #{userid} and categoryid = 102
 	</select>
 	<select id="count_comment" resultType="int">
 		select count(*)
