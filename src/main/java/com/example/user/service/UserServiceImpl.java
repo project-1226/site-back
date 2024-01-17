@@ -28,10 +28,10 @@ public class UserServiceImpl implements UserService {
 	public void insert(SurvetInsertDTO requestData) {
 		UserVO user = (UserVO) requestData.getUser();
 		List<AnswerVO> answers = (List<AnswerVO>) requestData.getResult();
-		System.out.println(user.toString());
-		for (AnswerVO answer : answers) {           
-            System.out.println("------------"+answer.toString());
-        }
+//		System.out.println(user.toString());
+//		for (AnswerVO answer : answers) {           
+//            System.out.println("------------"+answer.toString());
+//        }
 		
 		
 		HashMap<String, Object> read_user = dao.read(user);

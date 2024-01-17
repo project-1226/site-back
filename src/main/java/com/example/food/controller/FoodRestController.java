@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.food.dao.FoodDAO;
 import com.example.food.domain.FoodVO;
+import com.example.food.domain.MyFoodVO;
 
 @RestController
 @RequestMapping("/food")
@@ -31,5 +32,10 @@ public class FoodRestController {
 	@GetMapping("/list")
 	public  List<FoodVO> foodList(@RequestParam("categoryid") String categoryid) {	
 		return	dao.foodListOfCateg(categoryid);
+	}
+	
+	@GetMapping("/my_food_list")
+	public List<MyFoodVO> myFoodList(@RequestParam("userid")String userid){
+		return dao.myFoodList(userid);
 	}
 }

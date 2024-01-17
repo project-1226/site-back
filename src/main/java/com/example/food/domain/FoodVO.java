@@ -1,5 +1,7 @@
 package com.example.food.domain;
 
+import java.time.LocalDate;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,6 +10,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class FoodVO {
+//	private List<FoodVO> foods = new ArrayList<>();
+	
 	private int categoryid;
 	private int foodid;
 	private String name;
@@ -15,6 +19,8 @@ public class FoodVO {
 	private String image;
 	private String ingredients;
 	private String recipe;
-	private String regdate;
+	private LocalDate regdate;
 	private String description;
+	private String vidioid;
+
 }

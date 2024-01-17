@@ -20,4 +20,14 @@
        ORDER BY RAND()
 	   LIMIT 6;
     </select>
+    <select id="myFoodList" resultType="com.example.food.domain.MyFoodVO">
+       select 
+       	m.foodplanid,m.userid,m.categoryid,m.regdate,f.* 
+       	from  
+       		my_food_plan m,food f 
+       	where 
+       		m.foodid=f.foodid and userid = #{userid} 
+       		and m.regdate =(select MAX(regdate) from my_food_plan where userid = #{userid}) 
+       	limit 7;
+    </select>
 </mapper>
