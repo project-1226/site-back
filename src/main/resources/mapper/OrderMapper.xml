@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.OrderMapper">
+ 
+    <select id="list" resultType="hashmap">
+        select * from purchase where userid =#{userid}
+		
+	
+    </select>
+    <select id="purchasedetaillist" resultType="hashmap">
+        
+			SELECT * FROM view_purchase_detail_product_by_purchaseid6 where purchaseid =  #{purchaseid};
+   
+	
+    </select>
+      <select id="orderlist" resultType="hashmap">
+        
+			SELECT * FROM view_purchase_detail_product_by_purchaseid6 where orderid =  #{orderid};
+   
+	
+    </select>
+     <insert id="insert">
+    	insert into purchase(orderid, addressid, userid,totalprice,card,status,request)
+    	values(#{orderid}, #{addressid}, #{userid},#{totalprice},#{card},#{status},#{request})
+    </insert>
+  
+  	<select id="getaddressid" resultType="int">
+		SELECT 
+			addressid 
+		FROM 
+			address
+		WHERE 
+			userid = #{userid}
+		ORDER BY regdate DESC
+		LIMIT 1;
+		
+    </select>
+    <select id="getpurchaseid" resultType="int">
+		SELECT purchaseid
+		FROM purchase
+		WHERE userid = #{userid}
+		ORDER BY purchaseid DESC
+		LIMIT 1;
+		
+    </select>
+	    
+
+	 <insert id="purchasedetailinsert" parameterType="map">
+         INSERT INTO purchase_detail (purchaseid, productid, price, count)
+    SELECT #{purchaseid}, c.productid, p.price, c.count
+    FROM cart c
+    JOIN product p ON c.productid = p.productid
+    WHERE c.userid = #{userid};
+    </insert>
+	
+	<delete id="deleteCartByUserId">
+        DELETE FROM cart
+        WHERE userid = #{userid};
+    </delete>
+     <select id="getpurchaseidfordetail" resultType="int">
+		SELECT purchaseid
+		FROM purchase
+		WHERE userid = #{userid}
+		ORDER BY purchaseid DESC
+		LIMIT 1;
+		
+    </select>
+    
+  
+</mapper>

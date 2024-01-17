@@ -30,10 +30,12 @@ public class CartRestController {
 //	    dao.delete(cartid);
 //	}
 	
-	@GetMapping("/delete")  //모델어티리뷰트를 사용해서 생성자값 json 데이터 통신함 전송시 데이터를 포함시킴 await axios('/cart/delete', { cartid: product.cartid });
-	public void delete(@ModelAttribute("vo") CartVO vo) {
-	    dao.delete(vo);
+	@GetMapping("/delete")
+	public void delete(@RequestParam("cartid") int cartid) {
+	    System.out.println("cartid: " + cartid);
+	    dao.delete(cartid);
 	}
+
 
 	
 	@GetMapping("/list.json")
