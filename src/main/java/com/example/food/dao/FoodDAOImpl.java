@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.food.domain.FoodVO;
+import com.example.food.domain.MyFoodVO;
 
 @Repository
 public class FoodDAOImpl implements FoodDAO{
@@ -40,4 +41,21 @@ public class FoodDAOImpl implements FoodDAO{
 		return session.selectList(namespace+".foodListOfCateg",Integer.parseInt(categoryid));
 	}
 
+	@Override
+	public List<MyFoodVO> myFoodList(String userid) {
+		
+		return session.selectList(namespace+".myFoodList", userid);
+	}
+	
+//	@Override
+//	public List<MyFoodVO> insertmyFoodList(List<MyFoodVO>??) {
+//		
+//		...... 마지막신단제공 날짜가 현재날짜보다 7일이전 -> 설문조사기반 추천식단음식데이터를 뱉는 함수실행(작성중)  
+//		...... input 추천식단리스트 -> 해당데이터 myfoodplan insert 
+//		...... 프론트에서 다시 getmyFoodList 
+//	
+//		return null;
+//	}
+	
+	
 }
