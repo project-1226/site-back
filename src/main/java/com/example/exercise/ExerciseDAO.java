@@ -1,5 +1,6 @@
 package com.example.exercise;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,4 +19,6 @@ public interface ExerciseDAO {
 	//내운동리스트 가져오기(카테고리별)
 	public List<ExerciseVO> listMyexercise(String userid,String categoryid);
 	
+	//마이페이지 -> 운동 카테고리만 출력
+	public List<HashMap<String, Object>> listMyExerciseCategory(String userid);
 }

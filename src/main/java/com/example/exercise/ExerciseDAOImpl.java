@@ -1,5 +1,6 @@
 package com.example.exercise;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +43,13 @@ public class ExerciseDAOImpl implements ExerciseDAO{
 //		params.put("categoryid", categoryid);
 //		return session.selectList(namespace + ".listMyexercise", params);				
 		return session.selectList(namespace+".listMyexercise",Map.of("userid", userid, "categoryid", categoryid));
+	}
+
+
+
+	@Override
+	public List<HashMap<String, Object>> listMyExerciseCategory(String userid) {
+		return session.selectList(namespace + ".myPlanCategory", userid);
 	}
 
 	
