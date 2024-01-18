@@ -1,5 +1,6 @@
 package com.example.food.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,4 +59,14 @@ public class FoodDAOImpl implements FoodDAO{
 //	}
 	
 	
+	// 마이페이지 푸드플랜
+	@Override
+	public List<HashMap<String, Object>> myFoodPlanDate(String userid) {
+		return session.selectList(namespace + ".planDate", userid);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> myFoodPlanListOfDate(MyFoodVO vo) {
+		return session.selectList(namespace + ".planListOfDate", vo);
+	}
 }
