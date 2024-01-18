@@ -1,5 +1,6 @@
 package com.example.exercise;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,11 @@ public class ExerciseRestController {
 	@GetMapping("/myexercises")
 	public List<ExerciseVO> listMyexercise(@RequestParam("userid") String userid,@RequestParam("categoryid") String categoryid){		
 		return dao.listMyexercise(userid, categoryid);
+	}
+	
+	//사용자가 선택한 운동의 카테고리만 출력
+	@GetMapping("/categoryList")
+	public List<HashMap<String, Object>> listMyExerciseCategory(@RequestParam("userid") String userid) {
+		return dao.listMyExerciseCategory(userid);
 	}
 }
