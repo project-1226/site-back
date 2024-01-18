@@ -38,4 +38,10 @@ public class FoodRestController {
 	public List<MyFoodVO> myFoodList(@RequestParam("userid")String userid){
 		return dao.myFoodList(userid);
 	}
+	
+    @GetMapping("/random-my-food")
+    public List<MyFoodVO> randomMyFood(@RequestParam("categoryid") String categoryid, @RequestParam("foodid") String foodid ) {
+    	
+        return dao.randomMyFood(categoryid,foodid);
+    }
 }

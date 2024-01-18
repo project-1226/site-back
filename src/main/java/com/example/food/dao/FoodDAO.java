@@ -3,6 +3,8 @@ package com.example.food.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.example.food.domain.FoodVO;
 import com.example.food.domain.MyFoodVO;
 
@@ -20,5 +22,7 @@ public interface FoodDAO {
 	public List<MyFoodVO> myFoodList(String userid);
 	//추천식단 등록하기 
 //	public List<MyFoodVO> insertmyFoodList(List<MyFoodVO>??)
+	
+	public List<MyFoodVO> randomMyFood(String categoryid, String foodid); 
 
 }
