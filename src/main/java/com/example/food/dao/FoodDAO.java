@@ -1,5 +1,6 @@
 package com.example.food.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,5 +21,10 @@ public interface FoodDAO {
 	public List<MyFoodVO> myFoodList(String userid);
 	//추천식단 등록하기 
 //	public List<MyFoodVO> insertmyFoodList(List<MyFoodVO>??)
+	
+	
+	//마이페이지 - 푸드플랜
+	public List<HashMap<String, Object>> myFoodPlanDate(String userid);
+	public List<HashMap<String, Object>> myFoodPlanListOfDate(MyFoodVO vo);
 
 }
