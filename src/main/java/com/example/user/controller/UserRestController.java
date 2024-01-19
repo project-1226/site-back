@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.survey.AnswerVO;
 import com.example.survey.SurvetInsertDTO;
 import com.example.user.dao.UserDAO;
 import com.example.user.domain.UserVO;
@@ -31,15 +32,12 @@ public class UserRestController {
 		return dao.read(vo);
 	}
 	
+	
 	@PostMapping("/insert")
 	public void insert(@RequestBody SurvetInsertDTO requestData) {
-		System.out.println(requestData);
-		System.out.println(requestData.getClass().getTypeName());
-		
-//		String result=requestData.toString();
-//		JSONObject object= result
-		
-		service.insert(requestData);
+		//System.out.println(requestData); //System.out.println(requestData.getClass().getTypeName());
+				
+		service.insert(requestData); // 회원가입+설문저장 SurvetInsertDTO (UserVO us + List<AnswerVO> result)
 	}
 	
 	@PostMapping("/login")

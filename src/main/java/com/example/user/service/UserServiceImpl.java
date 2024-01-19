@@ -21,34 +21,28 @@ public class UserServiceImpl implements UserService {
 	UserDAO dao;
 	
 	@Autowired
-	SurveyDAO sdao;
+	SurveyDAO surveydao;
 
+	//회원가입+설문결과저장
 	@Transactional
 	@Override
-	public void insert(SurvetInsertDTO requestData) {
+	public void insert(SurvetInsertDTO requestData) { 
 		UserVO user = (UserVO) requestData.getUser();
 		List<AnswerVO> answers = (List<AnswerVO>) requestData.getResult();
-//		System.out.println(user.toString());
-//		for (AnswerVO answer : answers) {           
-//            System.out.println("------------"+answer.toString());
-//        }
-		
 		
 		HashMap<String, Object> read_user = dao.read(user);
 		if(read_user == null) {
-			String new_userid =  dao.insert(user);
-			
-			System.out.println("!!!!!!!!!"+new_userid);
+			String new_userid =  dao.insert(user);			
 			
 			for (AnswerVO answer : answers) {
 	            answer.setUserid(new_userid);
-	            System.out.println("------------"+answer.toString());
+	            //System.out.println("------------"+answer.toString());
 	        }
 			
-			sdao.insertResult(answers);
+			surveydao.insertResult(answers);
 			
 		} else {
-	        throw new RuntimeException("User with this email already exists");
+	        throw new RuntimeException("User with this email already exists"); // exception처리 추후 수정
 	    }
 	}
 

@@ -30,6 +30,13 @@
 		insert into cart(productid, userid)
 		values(#{productid}, #{userid})
 	</insert>
+	<insert id="insertList" parameterType="java.util.List">
+		insert into cart(productid,userid,count)
+		values
+		<foreach collection="list" item="item" separator=",">   
+	    	(#{item.productid}, #{item.userid}, #{item.count})
+	    </foreach>	
+	</insert>
     <select id="list" resultType="hashmap">
         select *, (price*count) as sum, format(price*count, 0) as fmtsum
         from view_newcart
