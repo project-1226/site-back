@@ -12,5 +12,6 @@ public class ExerciseVO {
 	private int categoryid;
 	private int excerciseid;
 	private String name;
+	private String vidioid;
 	private int ai;
 }

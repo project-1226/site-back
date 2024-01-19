@@ -64,7 +64,10 @@ public class FoodDAOImpl implements FoodDAO{
 //	
 //		return null;
 //	}
-	
+	@Override
+	public int updateMyFood(@Param("foodplanid") String foodplanid, @Param("foodid") String foodid) {		
+		return session.update(namespace+".updateMyFood",Map.of("foodplanid", foodplanid, "foodid", foodid));
+	}
 	
 	// 마이페이지 푸드플랜
 	@Override
@@ -76,4 +79,6 @@ public class FoodDAOImpl implements FoodDAO{
 	public List<HashMap<String, Object>> myFoodPlanListOfDate(MyFoodVO vo) {
 		return session.selectList(namespace + ".planListOfDate", vo);
 	}
+
+	
 }
