@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.food.domain.FoodVO;
 import com.example.food.domain.MyFoodVO;
@@ -47,6 +49,12 @@ public class FoodDAOImpl implements FoodDAO{
 		
 		return session.selectList(namespace+".myFoodList", userid);
 	}
+
+	@Override
+	public List<MyFoodVO> randomMyFood(@Param("categoryid") String categoryid, @Param("foodid") String foodid ) {
+		return session.selectList(namespace + ".randomMyFood",Map.of("categoryid", categoryid, "foodid", foodid));
+	}
+
 	
 //	@Override
 //	public List<MyFoodVO> insertmyFoodList(List<MyFoodVO>??) {

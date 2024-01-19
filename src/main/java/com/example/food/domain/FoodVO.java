@@ -13,6 +13,8 @@ public class FoodVO {
 //	private List<FoodVO> foods = new ArrayList<>();
 	
 	private int categoryid;
+	private String cname;
+	
 	private int foodid;
 	private String name;
 	private int kcal;

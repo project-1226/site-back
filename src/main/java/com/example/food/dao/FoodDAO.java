@@ -1,8 +1,9 @@
 package com.example.food.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.food.domain.FoodVO;
 import com.example.food.domain.MyFoodVO;
@@ -22,9 +23,6 @@ public interface FoodDAO {
 	//추천식단 등록하기 
 //	public List<MyFoodVO> insertmyFoodList(List<MyFoodVO>??)
 	
-	
-	//마이페이지 - 푸드플랜
-	public List<HashMap<String, Object>> myFoodPlanDate(String userid);
-	public List<HashMap<String, Object>> myFoodPlanListOfDate(MyFoodVO vo);
+	public List<MyFoodVO> randomMyFood(String categoryid, String foodid); 
 
 }

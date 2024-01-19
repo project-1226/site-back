@@ -1,12 +1,10 @@
 package com.example.food.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,13 +39,9 @@ public class FoodRestController {
 		return dao.myFoodList(userid);
 	}
 	
-	@GetMapping("/mypage/plandate")
-	public List<HashMap<String, Object>> myFoodPlanDate(@RequestParam("userid") String userid) {
-		return dao.myFoodPlanDate(userid);
-	}
-	
-	@GetMapping("/mypage/plan")
-	public List<HashMap<String, Object>> myFoodPlanListOfDate(@ModelAttribute("vo") MyFoodVO vo) {
-		return dao.myFoodPlanListOfDate(vo);
-	}
+    @GetMapping("/random-my-food")
+    public List<MyFoodVO> randomMyFood(@RequestParam("categoryid") String categoryid, @RequestParam("foodid") String foodid ) {
+    	
+        return dao.randomMyFood(categoryid,foodid);
+    }
 }
