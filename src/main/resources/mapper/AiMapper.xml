@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.AiMapper">
+    <select id="list" resultType="hashmap">
+    select * from ai_data;
+    </select>
+     <insert id="insert">
+    	insert into ai_result2 (userid, aidataid, result)VALUES(#{userid},#{aidataid},#{result});
+    
+    </insert>
+    
+    <select id="resultlist" resultType="hashmap">
+  				select * from ai_result2 where userid = (#{userid});
+    </select>
+</mapper>
