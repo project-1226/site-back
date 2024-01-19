@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.purchase.domain.OrderVO;
 import com.example.user.dao.CartDAO;
 import com.example.user.domain.CartVO;
 import com.example.user.domain.UserVO;
@@ -31,10 +32,10 @@ public class CartRestController {
 //	    dao.delete(cartid);
 //	}
 	
-	@GetMapping("/delete")
-	public void delete(@RequestParam("cartid") int cartid) {
-	    System.out.println("cartid: " + cartid);
-	    dao.delete(cartid);
+	@PostMapping("/delete")
+	public void delete(@RequestBody CartVO vo) {
+
+	    dao.delete(vo.getCartid());
 	}
 
 

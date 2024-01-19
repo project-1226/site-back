@@ -26,7 +26,7 @@
 	<select id="listMyexercise"
 		resultType="com.example.exercise.ExerciseVO" parameterType="map">
 		select
-		m.userid,e.* from my_exercise_plan m,exercise e
+		m.userid, m.categoryid, e.* from my_exercise_plan m,exercise e
 		where
 		m.excerciseid=e.excerciseid and m.userid=#{userid} and
 		m.categoryid=#{categoryid};
