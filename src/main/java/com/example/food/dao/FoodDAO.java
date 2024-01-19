@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.example.food.domain.FoodVO;
 import com.example.food.domain.MyFoodVO;
 
@@ -23,6 +25,7 @@ public interface FoodDAO {
 //	public List<MyFoodVO> insertmyFoodList(List<MyFoodVO>??)
 	
 	public List<MyFoodVO> randomMyFood(String categoryid, String foodid); 
+	public int updateMyFood( String foodplanid,  String foodid);
 	
 	//마이페이지 - 푸드플랜
 	public List<HashMap<String, Object>> myFoodPlanDate(String userid);

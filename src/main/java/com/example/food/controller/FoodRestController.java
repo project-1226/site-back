@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,7 +47,10 @@ public class FoodRestController {
     	
         return dao.randomMyFood(categoryid,foodid);
     }
-    
+    @GetMapping("/change-my-food")
+    public int updateMyFood(@RequestParam("foodplanid") String foodplanid, @RequestParam("foodid") String foodid) {	
+    	return dao.updateMyFood(foodplanid, foodid);
+    }
     
     //마이페이지 - 플랜 출력
 	@GetMapping("/mypage/plandate")
