@@ -42,6 +42,9 @@
 	    order by rand()
 	    limit 2;
     </select>
+    <update id="updateMyFood" parameterType="map">
+   		update my_food_plan set foodid = ${foodid} where foodplanid=#{foodplanid} ;                              
+    </update>
     
     <!-- 마이페이지 - 푸드플랜 -->
     <select id="planDate" resultType="hashmap">
