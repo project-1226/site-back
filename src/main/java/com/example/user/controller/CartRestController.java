@@ -4,10 +4,10 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.user.dao.CartDAO;
@@ -30,10 +30,12 @@ public class CartRestController {
 //	    dao.delete(cartid);
 //	}
 	
-	@GetMapping("/delete")  //모델어티리뷰트를 사용해서 생성자값 json 데이터 통신함 전송시 데이터를 포함시킴 await axios('/cart/delete', { cartid: product.cartid });
-	public void delete(@ModelAttribute("vo") CartVO vo) {
-	    dao.delete(vo);
+	@GetMapping("/delete")
+	public void delete(@RequestParam("cartid") int cartid) {
+	    System.out.println("cartid: " + cartid);
+	    dao.delete(cartid);
 	}
+
 
 	
 	@GetMapping("/list.json")

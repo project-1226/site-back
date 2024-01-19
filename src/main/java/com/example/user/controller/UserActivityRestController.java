@@ -32,7 +32,7 @@ public class UserActivityRestController {
 	
 	@GetMapping("/total-comment")
 	public int totalComment(@ModelAttribute("vo") UserActivityVO vo) {
-		return dao.totalPost(vo);
+		return dao.totalComment(vo);
 	}
 	
 	@GetMapping("/count-comment")
