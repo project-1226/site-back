@@ -27,17 +27,22 @@ public class ShoppingQnaDAOImpl implements ShoppingQnaDAO {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> listQna(String userid) {
-		return session.selectList(namespace + ".list_qna", userid);
+	public List<HashMap<String, Object>> listQna(ShoppingQnaVO vo) {
+		return session.selectList(namespace + ".list_qna", vo);
 	}
 
 	@Override
-	public int totalQna(String userid) {
-		return session.selectOne(namespace + ".total_qna", userid);
+	public int totalQna(ShoppingQnaVO vo) {
+		return session.selectOne(namespace + ".total_qna", vo);
 	}
 
 	@Override
 	public void deleteQna(ShoppingQnaVO vo) {
 		session.delete(namespace + ".delete_qna", vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> listAll(String commentOption) {
+		return session.selectList(namespace + ".list_all", commentOption);
 	}
 }

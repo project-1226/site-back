@@ -13,4 +13,5 @@ public class ShoppingQnaVO {
 	private String userid;
 	private String title;
 	private String content;
+	private String commentOption;
 }
