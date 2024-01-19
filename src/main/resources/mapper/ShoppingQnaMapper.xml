@@ -26,4 +26,18 @@
     	delete from post
     	where userid = #{userid} and postid = #{postid}
     </delete>
+    
+    <select id="list_all" resultType="hashmap">
+    select p.*, u.nickname username, c.commentid, c.content admin_content, c.regdate admin_regdate
+    from post p
+    left join comment c ON p.postid = c.postid
+    join user u ON p.userid = u.userid
+    where p.categoryid = #{categoryId}
+        <if test="commentOption != null and commentOption == 'none'">
+            and c.postid is null
+        </if>
+        <if test="commentOption != null and commentOption == 'withComments'">
+            and c.postid is not null
+        </if>
+	</select>
 </mapper>

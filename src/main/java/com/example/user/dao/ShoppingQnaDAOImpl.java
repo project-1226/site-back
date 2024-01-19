@@ -40,4 +40,9 @@ public class ShoppingQnaDAOImpl implements ShoppingQnaDAO {
 	public void deleteQna(ShoppingQnaVO vo) {
 		session.delete(namespace + ".delete_qna", vo);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> listAll() {
+		return session.selectList(namespace + ".list_all");
+	}
 }

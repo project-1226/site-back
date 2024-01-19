@@ -12,4 +12,6 @@ public interface ShoppingQnaDAO {
 	public List<HashMap<String, Object>> listQna(String userid);
 	public int totalQna(String userid);
 	public void deleteQna(ShoppingQnaVO vo);
+	
+	public List<HashMap<String, Object>> listAll();
 }

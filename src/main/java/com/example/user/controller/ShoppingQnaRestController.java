@@ -42,4 +42,9 @@ public class ShoppingQnaRestController {
 	public void deleteQna(@RequestBody ShoppingQnaVO vo) {
 		dao.deleteQna(vo);
 	}
+	
+	@GetMapping("/all")
+	public List<HashMap<String, Object>> listAll() {
+		return dao.listAll();
+	}
 }
