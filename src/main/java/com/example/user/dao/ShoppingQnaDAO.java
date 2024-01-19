@@ -9,9 +9,9 @@ public interface ShoppingQnaDAO {
 	public List<HashMap<String, Object>> listFaq(int categoryid);
 	
 	public void insertQna(ShoppingQnaVO vo);
-	public List<HashMap<String, Object>> listQna(String userid);
-	public int totalQna(String userid);
+	public List<HashMap<String, Object>> listQna(ShoppingQnaVO vo);
+	public int totalQna(ShoppingQnaVO vo);
 	public void deleteQna(ShoppingQnaVO vo);
 	
-	public List<HashMap<String, Object>> listAll();
+	public List<HashMap<String, Object>> listAll(String commentOption);
 }

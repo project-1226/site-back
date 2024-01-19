@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,10 +32,10 @@ public class ShoppingQnaRestController {
 	}
 	
 	@GetMapping("/list")
-	public HashMap<String, Object> listQna(@RequestParam("userid") String userid) {
+	public HashMap<String, Object> listQna(@ModelAttribute("vo") ShoppingQnaVO vo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("list", dao.listQna(userid));
-		map.put("total", dao.totalQna(userid));
+		map.put("list", dao.listQna(vo));
+		map.put("total", dao.totalQna(vo));
 		return map;
 	}
 	
@@ -44,7 +45,7 @@ public class ShoppingQnaRestController {
 	}
 	
 	@GetMapping("/all")
-	public List<HashMap<String, Object>> listAll() {
-		return dao.listAll();
+	public List<HashMap<String, Object>> listAll(@RequestParam("commentOption") String commentOption) {
+		return dao.listAll(commentOption);
 	}
 }
