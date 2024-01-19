@@ -68,7 +68,13 @@ public class CartDAOImpl implements CartDAO {
 
 	@Override
 	public int insertList(List<CartVO> voList) { //여러상품 insert
-		return session.insert(namespace+".insertList",voList);
+		for(CartVO vo:voList) {
+			session.insert(namespace+".insert",vo);
+		}
+		
+		
+		//return session.insert(namespace+".insertList",voList);
+		return 1;
 		
 	}
 

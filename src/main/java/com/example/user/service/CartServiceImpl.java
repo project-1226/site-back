@@ -41,6 +41,7 @@ public class CartServiceImpl  implements CartService{
 	@Override
 	//병렬처리하려고 해봤는데 좀 그러면 insert for문으로 실행해서 값받아오는내용으로 수정하기
 	public int insertList(List<String> ingreList) { 
+		int cnt = 0;
 		//마지막 요소 userid
 	    String userid = ingreList.get(ingreList.size() - 1);
 	    
@@ -72,19 +73,23 @@ public class CartServiceImpl  implements CartService{
 	    List<CartVO> cart = new ArrayList<>(); 
 	    for (ProductVO product : products) {
 	        if (product != null) { //에러처리했는데 왜 null이지?ㅠㅠㅠ
+	        
+	        	
 	            CartVO c = new CartVO();
 	            c.setCount(1);	          	            
 	            c.setProductid(product.getProductid());
 	            c.setUserid(userid);
-	            cart.add(c);
+	            insert(c);
+	            cnt += 1;
+	            //cart.add(c);
 	        } else {
 	        	System.out.println("pdao.searchIngredient(ingredient) = null");
 	            continue;	            
 	        }
 	    }
 	    
-	    return cdao.insertList(cart); 
-	    	//return 0;
+	    //return cdao.insertList(cart); 
+	    	return cnt;
 	}
 
 }

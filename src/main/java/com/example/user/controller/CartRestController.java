@@ -49,7 +49,7 @@ public class CartRestController {
 		return map;
 	}
 	
-	//단일 상품 insert
+	
 	@PostMapping("/insert")
 	public void insert(@RequestBody CartVO vo) {
 		service.insert(vo);
