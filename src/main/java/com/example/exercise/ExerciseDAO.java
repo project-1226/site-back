@@ -3,8 +3,6 @@ package com.example.exercise;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
 public interface ExerciseDAO {
 	
 	
