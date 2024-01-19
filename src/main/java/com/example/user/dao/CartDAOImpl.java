@@ -15,6 +15,7 @@ public class CartDAOImpl implements CartDAO {
 	@Autowired 
 	SqlSession session;
 	String namespace="com.example.mapper.CartMapper";
+	
 	@Override
 	public List<HashMap<String, Object>> list(UserVO vo) {
 		// TODO Auto-generated method stub
@@ -32,6 +33,8 @@ public class CartDAOImpl implements CartDAO {
 		// TODO Auto-generated method stub
 		session.insert(namespace + ".insert", vo);
 	}
+	
+	
 
 	@Override
 	public void delete(int cartid) {
@@ -61,6 +64,12 @@ public class CartDAOImpl implements CartDAO {
 	public String sum(String uid) {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace + ".sum", uid);
+	}
+
+	@Override
+	public int insertList(List<CartVO> voList) { //여러상품 insert
+		return session.insert(namespace+".insertList",voList);
+		
 	}
 
 	

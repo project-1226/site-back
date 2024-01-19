@@ -1,6 +1,7 @@
 package com.example.user.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,9 +48,16 @@ public class CartRestController {
 		return map;
 	}
 	
+	//단일 상품 insert
 	@PostMapping("/insert")
 	public void insert(@RequestBody CartVO vo) {
 		service.insert(vo);
+	}
+	
+	//myDiet(내식단)에서 재료담기
+	@PostMapping("/insert-list")
+	public int insertList(@RequestBody List<String> ingreList){
+		return service.insertList(ingreList);
 	}
 	
 	@PostMapping("/update/qnt")

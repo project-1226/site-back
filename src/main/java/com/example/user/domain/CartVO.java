@@ -8,6 +8,7 @@ public class CartVO {
 	private String userid;
 	private int count;
 	private Date regdate;
+	
 	public int getCartid() {
 		return cartid;
 	}
