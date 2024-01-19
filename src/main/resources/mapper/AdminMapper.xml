@@ -15,11 +15,15 @@
     	set title = #{title}, content = #{content}
     	where postid = #{postid}
     </update>
+    <delete id="deletePost">
+    	delete from post
+    	where postid= #{postid}
+    </delete>
     <select id="userList" resultType="hashmap">
     	select *
     	from user
     </select>
-    <insert id="insertProduct">
+    <insert id="insertProduct" useGeneratedKeys="true" keyProperty="productid">
     	insert into product(name, price, content)
     	values(#{name}, #{price}, #{content});
     </insert>
@@ -31,5 +35,37 @@
     	set name = #{name}, price = #{price}, content = #{content}
     	where productid = #{productid}
     </update>
+    <delete id="deleteProduct">
+    	delete from product
+    	where productid = #{productid}
+    </delete>
+    <delete id="deleteImage">
+    	delete from image
+    	where productid = #{productid}
+    </delete>
+    <select id="productList" resultType="hashmap">
+		select p.productid, p.name, p.price, p.content, i.image_url, format(p.price, 0) as fmtprice
+		from product p
+		left outer join image i
+		on p.productid=i.productid
+		where p.name like concat('%', #{query}, '%')
+		group by p.name, p.price, p.content, p.productid
+		limit #{start}, #{size};
+    </select>
+
+    <select id="total" resultType="int">
+    	select count(*)
+    	from product
+		where name LIKE concat('%', #{query}, '%');
+    </select>
     
+    <select id="imageList" resultType="hashmap">
+    	select *
+    	from image
+    	where productid = #{productid};
+    </select>
+    <insert id="insertImage">
+    	insert into image(productid, image_url)
+    	values(#{productid}, #{image_url});
+    </insert>
 </mapper>

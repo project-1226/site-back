@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.community_admin.domain.PostVO;
 import com.example.community_admin.domain.ProductVO;
+import com.example.community_admin.domain.QueryVO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO{
@@ -34,6 +35,12 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 
 	@Override
+	public void deletePost(int postid) {
+		session.delete(namespace + ".deletePost", postid);	
+	}
+	
+	
+	@Override
 	public List<HashMap<String, Object>> userList() {
 		return session.selectList(namespace + ".userList");
 	}
@@ -53,4 +60,38 @@ public class AdminDAOImpl implements AdminDAO{
 		session.update(namespace + ".updateProduct", vo);
 	}
 
+	@Override
+	public void deleteProduct(int productid) {
+		session.delete(namespace + ".deleteProduct", productid);
+	}
+
+	@Override
+	public void deleteImage(int productid) {
+		session.delete(namespace + ".deleteImage", productid);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> productList(QueryVO vo) {
+		vo.setStart((vo.getPage()-1) * vo.getSize());
+		return session.selectList(namespace + ".productList", vo);
+	}
+
+	@Override
+	public int total(QueryVO vo) {
+		return session.selectOne(namespace + ".total", vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> imageList(int productid) {
+		return session.selectList(namespace + ".imageList", productid);
+	}
+
+	@Override
+	public void insertImage(ProductVO vo) {
+		vo.getProductid();
+		session.insert(namespace + ".insertImage", vo);
+	}
+
+	
+	
 }
