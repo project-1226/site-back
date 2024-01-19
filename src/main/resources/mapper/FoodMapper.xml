@@ -42,4 +42,20 @@
 	    order by rand()
 	    limit 2;
     </select>
+    
+        <!-- 마이페이지 - 푸드플랜 -->
+    <select id="planDate" resultType="hashmap">
+    	select regdate, date_format(regdate, '%Y. %m. %d') start_date, date_format(regdate + 6, '%Y. %m. %d') end_date
+    	from my_food_plan
+    	where userid = #{userid} group by regdate order by regdate;
+    </select>
+    <select id="planListOfDate" resultType="hashmap">
+    	select m.*, f.*, c.name
+		from my_food_plan m, food f, category c
+		where m.foodid = f.foodid
+			and m.categoryid = c.categoryid
+		    and userid = #{userid}
+		    and m.regdate = #{regdate}
+		order by foodplanid;
+    </select>
 </mapper>
