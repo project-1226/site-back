@@ -11,7 +11,7 @@
                 categoryid BETWEEN 1 AND 11
             </if>
             <if test="type == 'exercise'">
-                categoryid BETWEEN 50 AND 58 ORDER BY RAND()
+                categoryid BETWEEN 50 AND 57 ORDER BY RAND()
             </if>
         </where>
     </select>
