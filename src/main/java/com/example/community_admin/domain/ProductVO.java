@@ -15,4 +15,5 @@ public class ProductVO {
 	private int price;
 	private String content;
 	private Date regdate;
+	private String image_url;
 }
