@@ -6,9 +6,10 @@
     	values(#{categoryid}, #{userid}, #{title}, #{content});
     </insert>
     <select id="list" resultType="hashmap">
-    	select *
-    	from post
-    	where categoryid = #{categoryid}
+    	select p.*, u.nickname, date_format(p.regdate, '%Y-%m-%d %T') as fmtdate
+		from post p, user u
+		where p.userid=u.userid
+		and categoryid = #{categoryid};
     </select>
     <update id="update">
     	update post
@@ -68,4 +69,18 @@
     	insert into image(productid, image_url)
     	values(#{productid}, #{image_url});
     </insert>
+    <select id="qnaList" resultType="hashmap">
+    	select *, date_format(regdate, '%Y-%m-%d %T') as fmtdate
+    	from post
+    	where categoryid = 107 and userid = #{userid}
+    	order by regdate desc;
+    </select>
+    <insert id="insertQnaComment">
+    	insert into comment(postid, userid, content)
+    	values(#{postid}, #{userid}, #{content});
+    </insert>
+    <select id="orderList" resultType="hashmap">
+    	select *
+    	from view_admin_orderInfo;
+    </select>
 </mapper>
