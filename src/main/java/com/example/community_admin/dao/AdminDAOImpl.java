@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.example.community_admin.domain.CommentVO;
 import com.example.community_admin.domain.PostVO;
 import com.example.community_admin.domain.ProductVO;
 import com.example.community_admin.domain.QueryVO;
@@ -92,6 +93,19 @@ public class AdminDAOImpl implements AdminDAO{
 		session.insert(namespace + ".insertImage", vo);
 	}
 
-	
+	@Override
+	public List<HashMap<String, Object>> qnaList(String userid) {
+		return session.selectList(namespace + ".qnaList", userid);
+	}
+
+	@Override
+	public void insertQnaComment(CommentVO vo) {
+		session.insert(namespace + ".insertQnaComment", vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> orderList() {
+		return session.selectList(namespace + ".orderList");
+	}
 	
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.community_admin.dao.AdminDAO;
+import com.example.community_admin.domain.CommentVO;
 import com.example.community_admin.domain.PostVO;
 import com.example.community_admin.domain.ProductSearch;
 import com.example.community_admin.domain.ProductVO;
@@ -46,7 +47,7 @@ public class AdminRestController {
 	}
 	
 	@PostMapping("/deletePost")
-	public void deletePost(@RequestBody int postid) {
+	public void deletePost(@RequestParam("postid") int postid) {
 		dao.deletePost(postid);
 	}
 	
@@ -75,7 +76,8 @@ public class AdminRestController {
 	}
 	
 	@PostMapping("/deleteProduct")
-	public void deleteProduct(@RequestBody int productid) {
+	public void deleteProduct(@RequestBody ProductVO vo) {
+		int productid = vo.getProductid();
 		service.deleteProduct(productid);
 	}
 	
@@ -92,5 +94,20 @@ public class AdminRestController {
 	@GetMapping("/imageList")
 	public List<HashMap<String, Object>> imageList(@RequestParam("productid") int productid) {
 		return dao.imageList(productid);
+	}
+	
+	@GetMapping("/qnaList")
+	public List<HashMap<String, Object>> qnaList(@RequestParam("userid") String userid) {
+		return dao.qnaList(userid);
+	}
+	
+	@PostMapping("/insertQnaComment")
+	public void insertQnaComment(@RequestBody CommentVO vo) {
+		dao.insertQnaComment(vo);
+	}
+	
+	@GetMapping("/orderList")
+	public List<HashMap<String, Object>> orderList() {
+		return dao.orderList();
 	}
 }

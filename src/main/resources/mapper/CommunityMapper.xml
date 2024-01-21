@@ -46,8 +46,9 @@
     </delete>
     
     <select id="list_comment" resultType="hashmap">
-    	select *
-    	from comment;
+    	select c.*, u.nickname, date_format(c.regdate, '%Y-%m-%d %T') as fmtdate
+		from comment c, user u
+		where c.postid=u.userid;
     </select>
     <select id="read_comment" resultType="hashmap">
     	select c.*
