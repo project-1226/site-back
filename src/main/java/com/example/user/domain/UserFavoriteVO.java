@@ -22,6 +22,8 @@ public class UserFavoriteVO {
 	private int price;
 	private String content;
 	
+	// food(찜 식단)
+	private int foodid;
 	//	post (스크랩)
 	private int postid;
 

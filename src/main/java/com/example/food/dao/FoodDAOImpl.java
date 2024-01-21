@@ -19,20 +19,6 @@ public class FoodDAOImpl implements FoodDAO{
 	SqlSession session;
 	String namespace="com.example.mapper.FoodMapper";
 	
-//	@Override
-//	public List<String> categoryList(String type) {
-//		List<Object> result = session.selectList(namespace+".categoryList",type);
-//		List<String> categories = new ArrayList<>();
-//		for (Object row : result) {
-//		       Map<String, Object> data = (Map<String, Object>) row;
-//		       String categoryName = (String) data.get("name");
-//		        // categoryName을 활용하여 필요한 가공을 수행하거나 리스트에 추가할 수 있습니다.
-//		       categories.add(categoryName);
-//		   }
-//		
-//		return categories;
-//	}
-	
 	@Override
 	public List<Map<String,Object>> categoryList(String type) {
 		return session.selectList(namespace+".categoryList",type);
@@ -40,7 +26,7 @@ public class FoodDAOImpl implements FoodDAO{
 
 	@Override
 	public List<FoodVO> foodListOfCateg(String categoryid) {		
-		return session.selectList(namespace+".foodListOfCateg",Integer.parseInt(categoryid));
+		return session.selectList(namespace+".foodListOfCateg",categoryid);
 	}
 
 	@Override
@@ -52,9 +38,7 @@ public class FoodDAOImpl implements FoodDAO{
 	@Override
 	public List<MyFoodVO> randomMyFood(@Param("categoryid") String categoryid, @Param("foodid") String foodid ) {
 		return session.selectList(namespace + ".randomMyFood",Map.of("categoryid", categoryid, "foodid", foodid));
-	}
-
-	
+	}	
 //	@Override
 //	public List<MyFoodVO> insertmyFoodList(List<MyFoodVO>??) {
 //		
@@ -68,6 +52,19 @@ public class FoodDAOImpl implements FoodDAO{
 	public int updateMyFood(@Param("foodplanid") String foodplanid, @Param("foodid") String foodid) {		
 		return session.update(namespace+".updateMyFood",Map.of("foodplanid", foodplanid, "foodid", foodid));
 	}
+	@Override
+	public int readFavorite(@Param("userid")String userid,@Param("foodid") String foodid) {	
+		return session.selectOne(namespace+".readFavorite",Map.of("userid", userid, "foodid", foodid));
+	}
+	@Override
+	public int insetFavorite(@Param("userid")String userid,@Param("foodid") String foodid) {
+		return session.insert(namespace+".insertFavorite",Map.of("userid", userid, "foodid", foodid));
+	}
+	@Override
+	public int deleteFavorite(@Param("userid")String userid,@Param("foodid") String foodid) {
+		return session.delete(namespace+".deleteFavorite",Map.of("userid", userid, "foodid",Integer.parseInt(foodid)));
+	}
+
 	
 	// 마이페이지 푸드플랜
 	@Override
@@ -79,6 +76,10 @@ public class FoodDAOImpl implements FoodDAO{
 	public List<HashMap<String, Object>> myFoodPlanListOfDate(MyFoodVO vo) {
 		return session.selectList(namespace + ".planListOfDate", vo);
 	}
+
+	
+	
+	
 
 	
 }

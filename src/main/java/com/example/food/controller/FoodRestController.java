@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,34 +22,46 @@ import com.example.food.domain.MyFoodVO;
 public class FoodRestController {
 	@Autowired
 	FoodDAO dao;
-	
-	//카테고리 리스트
-	//type(health.disease -> 수정?)
-	@GetMapping("/categories/{type}")
-	public  List<Map<String,Object>> categoryList(@PathVariable("type") String type) {	
-		return dao.categoryList(type);
-	}
-	
-	//카테고리 리스트
-	//api수정해야함 health말고
+		
+	//카테고리별 식단 리스트
 	@GetMapping("/list")
 	public  List<FoodVO> foodList(@RequestParam("categoryid") String categoryid) {	
 		return	dao.foodListOfCateg(categoryid);
 	}
 	
-	@GetMapping("/my_food_list")
+	//페이지 type별 카테고리 리스트
+	@GetMapping("/categories/{type}")
+	public  List<Map<String,Object>> categoryList(@PathVariable("type") String type) {	
+		return dao.categoryList(type);
+	}
+		
+	@GetMapping("/myfood/list")
 	public List<MyFoodVO> myFoodList(@RequestParam("userid")String userid){
 		return dao.myFoodList(userid);
 	}
-	
-    @GetMapping("/random-my-food")
-    public List<MyFoodVO> randomMyFood(@RequestParam("categoryid") String categoryid, @RequestParam("foodid") String foodid ) {
-    	
+		
+    @GetMapping("/myfood/otherlist")
+    public List<MyFoodVO> randomMyFood(@RequestParam("categoryid") String categoryid, @RequestParam("foodid") String foodid ) {  	
         return dao.randomMyFood(categoryid,foodid);
     }
-    @GetMapping("/change-my-food")
+    @GetMapping("/myfood/update")
     public int updateMyFood(@RequestParam("foodplanid") String foodplanid, @RequestParam("foodid") String foodid) {	
     	return dao.updateMyFood(foodplanid, foodid);
+    }
+
+    @GetMapping("/read/favorite")
+    public int isFavorite(@RequestParam("userid") String userid, @RequestParam("foodid") String foodid) {	
+    	return dao.readFavorite(userid, foodid);
+    }
+    
+    @GetMapping("/insert/favorite")
+    public int insetFavorite(@RequestParam("userid") String userid, @RequestParam("foodid") String foodid) {	
+    	return dao.insetFavorite(userid, foodid);
+    }
+    
+    @DeleteMapping("/delete/favorite")
+    public int deleteFavorite(@RequestParam("userid") String userid, @RequestParam("foodid") String foodid) {	
+    	return dao.deleteFavorite(userid, foodid);
     }
     
     //마이페이지 - 플랜 출력

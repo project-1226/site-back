@@ -45,6 +45,15 @@
     <update id="updateMyFood" parameterType="map">
    		update my_food_plan set foodid = ${foodid} where foodplanid=#{foodplanid} ;                              
     </update>
+    <select id="readFavorite" parameterType="map" resultType="int">
+    	select count(*) from favorite where userid=#{userid} and foodid=#{foodid}
+    </select>
+    <insert id="insertFavorite" parameterType="map">
+    	insert into favorite(userid,foodid) value(#{userid},#{foodid})
+    </insert>
+    <delete id="deleteFavorite" parameterType="map">
+    	delete from favorite where userid=#{userid} and foodid=#{foodid}
+    </delete>
     
     <!-- 마이페이지 - 푸드플랜 -->
     <select id="planDate" resultType="hashmap">
