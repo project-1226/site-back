@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.AdminMapper">
+    <insert id="insert">
+    	insert into post(categoryid, userid, title, content)
+    	values(#{categoryid}, #{userid}, #{title}, #{content});
+    </insert>
+    <select id="list" resultType="hashmap">
+    	select p.*, u.nickname, date_format(p.regdate, '%Y-%m-%d %T') as fmtdate
+		from post p, user u
+		where p.userid=u.userid
+		and categoryid = #{categoryid};
+    </select>
+    <update id="update">
+    	update post
+    	set title = #{title}, content = #{content}
+    	where postid = #{postid}
+    </update>
+    <delete id="deletePost">
+    	delete from post
+    	where postid= #{postid}
+    </delete>
+    <select id="userList" resultType="hashmap">
+    	select *
+    	from user
+    </select>
+    <insert id="insertProduct" useGeneratedKeys="true" keyProperty="productid">
+    	insert into product(name, price, content)
+    	values(#{name}, #{price}, #{content});
+    </insert>
+    <insert id="insertProR">
+    	call ProductRegister(#{name}, #{price}, #{content}, #{image_names}, #{image_urls});
+    </insert>
+    <update id="updateProduct">
+    	update product
+    	set name = #{name}, price = #{price}, content = #{content}
+    	where productid = #{productid}
+    </update>
+    <delete id="deleteProduct">
+    	delete from product
+    	where productid = #{productid}
+    </delete>
+    <delete id="deleteImage">
+    	delete from image
+    	where productid = #{productid}
+    </delete>
+    <select id="productList" resultType="hashmap">
+		select p.productid, p.name, p.price, p.content, i.image_url, format(p.price, 0) as fmtprice
+		from product p
+		left outer join image i
+		on p.productid=i.productid
+		where p.name like concat('%', #{query}, '%')
+		group by p.name, p.price, p.content, p.productid
+		limit #{start}, #{size};
+    </select>
+
+    <select id="total" resultType="int">
+    	select count(*)
+    	from product
+		where name LIKE concat('%', #{query}, '%');
+    </select>
+    
+    <select id="imageList" resultType="hashmap">
+    	select *
+    	from image
+    	where productid = #{productid};
+    </select>
+    <insert id="insertImage">
+    	insert into image(productid, image_url)
+    	values(#{productid}, #{image_url});
+    </insert>
+    <select id="qnaList" resultType="hashmap">
+    	select *, date_format(regdate, '%Y-%m-%d %T') as fmtdate
+    	from post
+    	where categoryid = 107 and userid = #{userid}
+    	order by regdate desc;
+    </select>
+    <insert id="insertQnaComment">
+    	insert into comment(postid, userid, content)
+    	values(#{postid}, #{userid}, #{content});
+    </insert>
+    <select id="orderList" resultType="hashmap">
+    	select *
+    	from view_admin_orderInfo;
+    </select>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ShoppingQnaMapper">
+    <select id="list_faq" resultType="hashmap">
+    	select *, date_format(regdate, '%Y-%m-%d %T') fmtdate
+    	from post
+    	where categoryid = #{categoryid};
+    </select>
+    
+    <insert id="insert_qna">
+    	insert into post(categoryid, userid, title, content)
+    	values(107, #{userid}, #{title}, #{content})
+    </insert>
+    <select id="list_qna" resultType="hashmap">
+    	select p.*, date_format(p.regdate, '%Y-%m-%d %T') fmtdate, c.commentid, c.content admin_content, date_format(c.regdate, '%Y-%m-%d %T') admin_regdate
+    	from post p
+    	left join comment c ON p.postid = c.postid
+    	where p.categoryid = 107 and p.userid = #{userid}
+	        <if test="commentOption != null and commentOption == 'none'">
+	            and c.postid is null
+	        </if>
+	        <if test="commentOption != null and commentOption == 'withComments'">
+	            and c.postid is not null
+	        </if>
+    	order by p.regdate desc
+    </select>
+    <select id="total_qna" resultType="int">
+    	select count(*)
+    	from post p
+    	left join comment c ON p.postid = c.postid
+    	where p.categoryid = 107 and p.userid = #{userid}
+    		<if test="commentOption != null and commentOption == 'none'">
+	            and c.postid is null
+	        </if>
+	        <if test="commentOption != null and commentOption == 'withComments'">
+	            and c.postid is not null
+	        </if>
+    </select>
+    <delete id="delete_qna">
+    	delete from post
+    	where userid = #{userid} and postid = #{postid}
+    </delete>
+    
+    <select id="list_all" resultType="hashmap">
+    select p.*, date_format(p.regdate, '%Y-%m-%d %T') fmtdate, u.nickname username, c.commentid, c.content admin_content, date_format(c.regdate, '%Y-%m-%d %T') admin_regdate
+    from post p
+    left join comment c ON p.postid = c.postid
+    join user u ON p.userid = u.userid
+    where p.categoryid = 107
+        <if test="commentOption != null and commentOption == 'none'">
+            and c.postid is null
+        </if>
+        <if test="commentOption != null and commentOption == 'withComments'">
+            and c.postid is not null
+        </if>
+    order by p.regdate desc
+	</select>
+</mapper>

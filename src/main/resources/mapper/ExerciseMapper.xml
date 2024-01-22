@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ExerciseMapper">
+	<select id="list" resultType="com.example.exercise.ExerciseVO">
+		select m.categoryid,e.*
+		FROM
+		exercise e, food_exercise_category_mapping m
+		WHERE e.excerciseid =
+		m.excerciseid AND m.categoryid = #{categoryid};
+	</select>
+	<select id="readMyExercise"
+		resultType="com.example.exercise.ExerciseVO">
+		select *
+		from my_exercise_plan
+		where userid = #{userid} and
+		excerciseid =
+		#{excerciseid};
+	</select>
+	<insert id="insertMyExercises" parameterType="java.util.List">
+		insert into my_exercise_plan(userid,categoryid,excerciseid)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.userid}, #{item.categoryid}, #{item.excerciseid})
+		</foreach>
+	</insert>
+	<select id="listMyexercise"
+		resultType="com.example.exercise.ExerciseVO" parameterType="map">
+		select
+		m.userid, m.categoryid, e.* from my_exercise_plan m,exercise e
+		where
+		m.excerciseid=e.excerciseid and m.userid=#{userid} and
+		m.categoryid=#{categoryid};
+	</select>
+
+	<!-- 마이페이지 - 운동 플랜 -->
+	<select id="myPlanCategory" resultType="hashmap">
+		select m.categoryid, c.name
+		from my_exercise_plan m, category c
+		where m.categoryid = c.categoryid
+		and m.userid = #{userid}
+		group by categoryid;
+	</select>
+</mapper>

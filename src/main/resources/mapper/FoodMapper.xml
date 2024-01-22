@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.FoodMapper">
+    <select id="categoryList" resultType="hashmap">
+       select * from category 
+       <where>
+            <if test="type == 'health'">
+                categoryid BETWEEN 14 AND 22
+            </if>
+            <if test="type == 'disease'">
+                categoryid BETWEEN 1 AND 11
+            </if>
+            <if test="type == 'exercise'">
+                categoryid BETWEEN 50 AND 57 ORDER BY RAND()
+            </if>
+        </where>
+    </select>
+    
+    <select id="foodListOfCateg" resultType="com.example.food.domain.FoodVO">
+       select fc.categoryid,f.* from food_exercise_category_mapping fc,food f where fc.foodid = f.foodid and fc.categoryid =#{categoryid}
+       ORDER BY RAND()
+	   LIMIT 6;
+    </select>
+    
+    <select id="myFoodList" resultType="com.example.food.domain.MyFoodVO">
+       select 
+       	m.foodplanid,m.userid,m.categoryid,c.name as cname,m.regdate,f.* 
+       	from  
+       		my_food_plan m,food f,category c 
+       	where 
+       		m.foodid=f.foodid and m.categoryid = c.categoryid
+       		and userid = #{userid} 
+       		and m.regdate =(select MAX(regdate) from my_food_plan where userid = #{userid}) 
+       	limit 7;
+    </select>
+    
+    <select id="randomMyFood" resultType="com.example.food.domain.MyFoodVO" parameterType="map">
+    	select m.categoryid,c.name as cname, f.*
+	    from food f, food_exercise_category_mapping m,category c 
+	    where f.foodid = m.foodid and m.categoryid = c.categoryid
+	    AND m.foodid > 0 and m.categoryid = 14 and f.foodid != 13
+	    order by rand()
+	    limit 2;
+    </select>
+    <update id="updateMyFood" parameterType="map">
+   		update my_food_plan set foodid = ${foodid} where foodplanid=#{foodplanid} ;                              
+    </update>
+    <select id="readFavorite" parameterType="map" resultType="int">
+    	select count(*) from favorite where userid=#{userid} and foodid=#{foodid}
+    </select>
+    <insert id="insertFavorite" parameterType="map">
+    	insert into favorite(userid,foodid) value(#{userid},#{foodid})
+    </insert>
+    <delete id="deleteFavorite" parameterType="map">
+    	delete from favorite where userid=#{userid} and foodid=#{foodid}
+    </delete>
+    
+    <!-- 마이페이지 - 푸드플랜 -->
+    <select id="planDate" resultType="hashmap">
+    	select regdate, date_format(regdate, '%Y. %m. %d') start_date, date_format(regdate + 6, '%Y. %m. %d') end_date
+    	from my_food_plan
+    	where userid = #{userid} group by regdate order by regdate;
+    </select>
+    <select id="planListOfDate" resultType="hashmap">
+    	select m.*, f.*, c.name cname
+		from my_food_plan m, food f, category c
+		where m.foodid = f.foodid
+			and m.categoryid = c.categoryid
+		    and userid = #{userid}
+		    and m.regdate = #{regdate}
+		order by foodplanid;
+    </select>
+</mapper>

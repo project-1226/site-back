@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CommunityMapper">
+    <select id="list" resultType="hashmap">
+        select p.*, u.nickname
+		from post p, user u
+		where p.userid=u.userid
+		and categoryid = #{categoryid};
+    </select>
+    <select id="list_review" resultType="hashmap">
+    	select *
+    	from view_review;
+    </select>
+    <insert id="insert">
+    	insert into post(categoryid, userid, title, content)
+    	values(#{categoryid}, #{userid}, #{title}, #{content});
+    </insert>
+    <insert id="insert_review">
+    	call ReviewInsert(#{categoryid}, #{userid}, #{title}, #{content}, #{image_names}, #{image_urls});
+    </insert>
+    <select id="read" resultType="hashmap">
+    	select *
+    	from post
+    	where postid = #{postid};
+    </select>
+    <select id="read_review" resultType="hashmap">
+		select p.*, u.nickname
+		from post p, user u
+		where u.userid=p.userid
+		and p.categoryid=  #{categoryid}
+		and p.postid = #{postid};
+    </select>
+    <select id="image_list" resultType="hashmap">
+    	select *
+    	from image
+    	where postid = #{postid};
+    </select>
+    
+    <update id="update_post">
+    	update post
+    	set title = #{title}, content = #{content}
+    	where categoryid = #{categoryid} and postid = #{postid};
+    </update>
+    <delete id="delete">
+    	delete from post where postid = #{postid};
+    </delete>
+    
+    <select id="list_comment" resultType="hashmap">
+    	select c.*, u.nickname, date_format(c.regdate, '%Y-%m-%d %T') as fmtdate
+		from comment c, user u
+		where c.postid=u.userid;
+    </select>
+    <select id="read_comment" resultType="hashmap">
+    	select c.*
+			  ,u.nickname
+			  ,(select count(*)
+				from favorite f
+                where f.commentid = c.commentid
+                and f.userid = #{userid}) as ucnt
+		from comment c, user u
+		where c.userid = u.userid
+		and c.postid = #{postid};
+    </select>
+    <insert id="insert_comment">
+    	insert into comment(postid, userid, content)
+    	values(#{postid}, #{userid}, #{content});
+    </insert>
+    <update id="update_comment">
+    	update comment
+    	set content = #{updateContent}, regdate = now()
+    	where commentid = #{commentid};
+    </update>
+    <delete id="delete_comment">
+    	delete from comment
+    	where commentid = #{commentid}
+    </delete>
+    <delete id="delete_all_comment">
+    	delete from comment
+    	where postid = #{postid}
+    </delete>
+    <select id="total_comment" resultType="int">
+    	select count(*) as commentCnt
+		from comment
+		where postid = #{postid};
+    </select>
+    <update id="update_post_cnt">
+    	update post
+		set cnt = cnt +1
+		where postid = #{postid};
+    </update>
+    <insert id="insert_favorite">
+    	insert into favorite(userid, commentid)
+    	values(#{userid}, #{commentid});
+    </insert>
+    <delete id="delete_favorite">
+    	delete from favorite
+    	where userid = #{userid} and commentid = #{commentid};
+    </delete>
+    <update id="update_favorite">
+    	update comment
+    	set fcnt = fcnt + #{amount}
+    	where commentid = #{commentid};
+    </update>
+    <delete id="delete_image">
+    	delete from image
+    	where postid = #{postid};
+    </delete>
+</mapper>

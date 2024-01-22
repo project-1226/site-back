@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CartMapper">
+  <select id="sum" resultType="string">
+		select format(sum(price*count),0) as fmtsum
+		from view_newcart
+		where userid=#{userid};
+	</select>
+	<update id="update_qnt">
+		update cart
+		set count=#{count}
+		where cartid=#{cartid}
+	</update>
+	<update id="update">
+		update cart
+		set count = count + #{count}
+		where productid=#{productid} and userid=#{userid}
+	</update>
+	<select id="check" resultType="int">
+		select count(*)
+		from cart
+		where productid=#{productid} and userid=#{userid}
+	</select>
+	<delete id="delete">
+		delete 
+		from cart
+		where cartid=#{cartid}
+	</delete>
+	<insert id="insert">
+		insert into cart(productid, userid)
+		values(#{productid}, #{userid})
+	</insert>
+	<insert id="insertList" parameterType="java.util.List">
+		insert into cart(productid,userid,count)
+		values
+		<foreach collection="list" item="item" separator=",">   
+	    	(#{item.productid}, #{item.userid}, #{item.count})
+	    </foreach>	
+	</insert>
+    <select id="list" resultType="hashmap">
+        select *, (price*count) as sum, format(price*count, 0) as fmtsum
+        from view_newcart
+        where userid=#{userid}
+		order by regdate desc
+	
+    </select>
+    <select id="total" resultType="int">
+    	select count(*)
+    	from cart
+    	where userid=#{userid}
+    </select>
+    
+    
+    
+</mapper>

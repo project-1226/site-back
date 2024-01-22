@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ProductReviewMapper">
+	<select id="list_user" resultType="hashmap">
+		select pr.*, p.name, pd.count,
+		date_format(pr.regdate, '%Y-%m-%d %T') fmtdate
+		from product_review pr, purchase_detail pd, product p
+		where pr.purchasedetailid = pd.purchasedetailid and pr.productid =
+		p.productid and userid = #{userid}
+		order by regdate desc
+		limit #{start}, #{size}
+	</select>
+	<select id="total" resultType="int">
+		select count(*) cnt
+		from
+		product_review
+		where userid = #{userid}
+	</select>
+	<select id="read" resultType="hashmap">
+		select *, date_format(regdate,
+		'%Y-%m-%d %T') fmtdate
+		from product_review
+		where product_reviewid;
+	</select>
+	<select id="require_review" resultType="hashmap">
+		select *,
+		date_format(right(orderid, 8), '%Y. %m. %d') fmtdate, format(price, 0)
+		fmtprice from
+		view_require_product_review where userid = #{userid}
+		order by
+		case when
+		purchaseid = #{purchaseid} then 0 else 1 end,
+		purchaseid desc,
+		purchasedetailid desc
+		limit #{start}, #{size}
+	</select>
+	<select id="total_require_review" resultType="int">
+		select count(*)
+		from view_require_product_review where userid = #{userid}
+	</select>
+	<select id="list_image" resultType="hashmap">
+		select * from image where
+		product_reviewid = #{product_reviewid}
+	</select>
+	<select id="count_image" resultType="int">
+		select count(*) cnt
+		from
+		image
+		where product_reviewid = #{product_reviewid}
+	</select>
+	<insert id="insert">
+		call ProductReview_insert(#{userid}, #{productid},
+		#{score}, #{content}, #{purchasedetailid}, #{image_names},
+		#{image_urls})
+	</insert>
+	<delete id="delete_review">
+		delete from product_review
+		where product_reviewid =
+		#{product_reviewid}
+	</delete>
+	<delete id="delete_image">
+		delete from image
+		where product_reviewid =
+		#{product_reviewid}
+	</delete>
+</mapper>

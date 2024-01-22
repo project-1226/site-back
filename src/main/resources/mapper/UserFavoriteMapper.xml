@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserFavoriteMapper">
+    <select id="list_image" resultType="hashmap">
+    	select *
+    	from image
+    	where productid = #{productid} or postid = #{postid}
+    </select>
+    
+    <select id="list_fproduct" resultType="hashmap">
+        select *, date_format(regdate, '%Y-%m-%d %T') fmtdate, format(price, 0) fmtprice
+        from view_favorite_product
+        where userid = #{userid}
+        order by regdate desc
+        limit #{start}, #{size};
+    </select>  
+     
+    <select id="total_fproduct" resultType="int">
+    	select count(*) from view_favorite_product
+    	where userid = #{userid}
+    </select>
+    
+    <select id="list_ffood" resultType="com.example.user.domain.UserFavoriteFoodVO" parameterType='map'>
+    	select 
+			fv.favoriteid,fv.userid,fv.regdate, date_format(fv.regdate, '%Y-%m-%d') fmtdate,
+		    c.categoryid,c.name as cname,
+		    f.foodid,f.name,f.image,f.ingredients,f.recipe,f.description,f.vidioid 
+		from 
+			favorite fv,food f,category c,food_exercise_category_mapping cm 
+		where 
+			fv.foodid = f.foodid and f.foodid = cm.foodid and cm.categoryid = c.categoryid 
+			and userid=#{userid}
+		    order by regdate desc
+		    limit #{start}, #{size}; 
+    </select>
+    
+    <select id="total_ffood" resultType="int">
+    	select count(*) from favorite fv,food f where fv.foodid = f.foodid and userid=#{userid}
+    </select>
+    <delete id="delete">
+    	delete from favorite
+    	where favoriteid = #{favoriteid}
+    </delete>
+</mapper>

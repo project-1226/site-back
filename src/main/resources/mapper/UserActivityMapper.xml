@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserActivityMapper">
+	<select id="list_post" resultType="hashmap">
+		select *, date_format(regdate, '%Y-%m-%d %T') fmtdate
+		from post
+		where userid = #{userid} and categoryid = 102
+		order by regdate desc
+		limit #{start}, #{size}
+	</select>
+	<select id="total_post" resultType="int">
+		select count(*)
+		from post
+		where userid = #{userid} and categoryid = 102
+	</select>
+	<select id="count_comment" resultType="int">
+		select count(*)
+		from comment
+		where postid = #{postid}
+	</select>
+	<select id="list_comment" resultType="hashmap">
+		select c.*, date_format(c.regdate, '%Y-%m-%d %T') fmtdate, p.title, date_format(p.regdate, '%Y-%m-%d %T') post_regdate
+		from comment c, post p
+		where c.userid = #{userid} and c.postid = p.postid
+		order by c.regdate desc
+		limit #{start}, #{size}
+	</select>
+	<select id="total_comment" resultType="int">
+		select count(*)
+		from comment
+		where userid = #{userid}
+	</select>
+</mapper>
